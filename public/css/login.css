@@ -1,0 +1,217 @@
+/* Declarations */
+:root {
+    --cor-rosa: rgb(247, 0, 255);
+    --cor-roxo-bg: rgb(81, 21, 221);
+    --cor-vermelho: red;
+    --cor-vermelho-violeta: #ff000079;
+    --cor-white: white;
+    --cor-lilas: #ce90f4;
+    --cor-lilas-input: #d7a5f6;
+    --cor-lilas-input-onFocus: #c67ff3;
+    --cor-cinza-texto: #777777;
+    --cor-circulo-laranja: rgb(253, 146, 5);
+    --cor-circulo-amarelo: rgb(255, 255, 0);
+    --cor-btn-border: rgba(255, 255, 255, 0.5);
+    --cor-btn-bg: rgba(255, 255, 255, 0.1);
+    --cor-btn-bg-before: rgba(255, 255, 255, 0.185);
+  }
+  
+  /* circulos do login */
+  .circulo {
+    width: 18.75rem;
+    height: 18.75rem;
+    position: absolute;
+    border-radius: 50%;
+    animation: float 10s infinite linear;
+    margin: -3.12rem;
+    pointer-events: none;
+    overflow: hidden;
+    position: fixed;
+  }
+  
+  .amarelo {
+    background-color: var(--cor-circulo-amarelo);
+  }
+  
+  .laranja {
+    background-color: var(--cor-circulo-laranja);
+  }
+  
+  .abaixo {
+    margin-top: 11rem;
+  }
+  
+  .pequeno {
+    width: 9.375rem;
+    height: 9.375rem;
+  }
+  
+  .leftone {
+    justify-content: right;
+    right: 0;
+  }
+  
+  .lefttwo {
+    right: 0;
+  }
+  
+  /* Animação para fazer os círculos flutuarem */
+  @keyframes float {
+    0% {
+      transform: translateY(-6.25rem);
+    }
+  
+    50% {
+      transform: translateY(-3.125rem);
+    }
+  
+    100% {
+      transform: translateY(-6.25rem);
+    }
+  }
+  
+  /* corpo */
+  .conteudo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(
+      to top,
+      var(--cor-rosa),
+      var(--cor-roxo-bg)
+    );
+  }
+  
+  /* card central */
+  .bloco {
+    background-color: var(--cor-lilas);
+    width: 35rem;
+    height: 28rem;
+    border-radius: 1.8rem;
+    font-size: 12pt;
+    padding: 5rem 2rem 0;
+    color: var(--cor-cinza-texto);
+  }
+  
+  /* Estilo para senha incorreta */
+  .senhaIncorreta {
+    text-align: center;
+    color: var(--cor-vermelho);
+  }
+  
+  /* imputs */
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem var(--cor-lilas-input-onFocus) !important;
+  }
+  
+  .form-floating > label::after {
+    background-color: transparent !important;
+  }
+  
+  .form-control {
+    background-color: var(--cor-lilas-input) !important;
+    border: none !important;
+  }
+
+  .invalid{
+    box-shadow: 0 0 0 0.2rem var(--cor-vermelho-violeta) !important;
+  }
+  .invalid:focus {
+    box-shadow: 0 0 0 0.2rem var(--cor-vermelho-violeta) !important;
+  }
+  
+  /* Estilo para ajustar a posição e o tamanho da imagem do olho */
+  .olho {
+    position: absolute;
+    top: 50%;
+    z-index: 6 !important;
+    transform: translateY(-50%);
+    right: 1rem;
+    cursor: pointer;
+    width: auto;
+    height: 1.1rem !important;
+  }
+  
+  .apaga{
+    position: absolute;
+    top: 50%;
+    z-index: 6 !important;
+    transform: translateY(-50%);
+    right: 1rem;
+    cursor: pointer;
+    width: auto;
+    height: 1rem !important;
+  }
+  
+  /* torna tudo não selecionavel */
+  .naoSelecionavel {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* tamanho do botão */
+  .btn {
+    width: 18.75rem;
+    height: 4.37rem;
+  }
+  
+  /* posição do botao */
+  .butaum {
+    text-align: center;
+    padding-top: 3rem;
+    vertical-align: middle;
+  }
+  
+  .btn-three {
+    color: var(--cor-white);
+    transition: all 0.5s;
+    position: relative;
+  }
+  
+  .btn-three span {
+    z-index: 6;
+    color: var(--cor-white);
+  }
+  
+  .btn-three::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: var(--cor-btn-bg-before);
+    transition: all 0.5s;
+  }
+  
+  .btn-three:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+  }
+  
+  .btn-three::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid var(--cor-btn-border);
+    background-color: var(--cor-btn-bg);
+    transform: scale(1.2, 1.2);
+  }
+  
+  .btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  

@@ -1,0 +1,400 @@
+/* TEMA CLARO */
+:root {
+    --cor-nav-separator: #b9b9b9;
+    --cor-stats-blue: #005bb6;
+    --cor-card-header-blue: #007bff;
+    --cor-white: #fff;
+    --cor-black: #000000;
+    --cor-cinza: #494949;
+    --black-shadow: #0000001a;
+    --cor-table-tr: #b9b9b9;
+    --cor-footer: #dfdfdf;
+    --cor-select-cinza: #dfdfdf;
+    --cor-select-cinza-bg: #dfdfdf;
+    --cor-select-cinza-hover: #dfdfdf;
+    --cor-select-cinza-hover-bg: #dfdfdf;
+    /* SLA */
+    --cor-laranja: #ff8400;
+    --cor-laranja-bg: #fcd48c;
+    --cor-verde: #06c902;
+    --cor-verde-bg: #a6f1a6;
+    --cor-red: #e42a1d;
+    --cor-red-bg: #ffcdd2;
+}
+
+/* TEMA ESCURO */
+body[data-bs-theme="dark"] {
+    --cor-texto: #c2c2c2;
+    --cor-texto-hover: #7a7a7a;
+    --cor-nav-separator: #6c757d;
+    --cor-stats-blue: #17436e;
+    --cor-card-header-blue: #208fff;
+    --cor-white: #e2e2e2;
+    --cor-black: #bbbbbb;
+    --cor-cinza: #6c757d;
+    --black-shadow: #00000080;
+    --cor-table-tr: #343a40;
+    --cor-footer: #343a40;
+    --cor-select-cinza: #6c757d;
+    --cor-select-cinza-bg: #495057;
+    --cor-select-cinza-hover: #d4d4d4;
+    --cor-select-cinza-hover-bg: #5c5c5c;
+    /* SLA */
+    --cor-laranja: #ffa500;
+    --cor-laranja-bg: #ffffff;
+    --cor-verde: #28a745;
+    --cor-verde-bg: #98fb98;
+    --cor-red: #dc3545;
+    --cor-red-bg: #ffccd2;
+}
+
+/* TAMANHOS */
+.imagem-grande {
+    width: 3.2rem;
+    max-width: 100%;
+}
+
+.imagem-medio {
+    width: 1.7rem;
+    max-width: 100%;
+}
+
+.h-1_5 {
+    height: 1.5rem;
+}
+
+.h-3_5 {
+    height: 3.5rem;
+}
+
+.w-10 {
+    width: 10rem !important;
+}
+
+.w-4_5 {
+    width: 4.5rem !important;
+}
+
+.w-3_5 {
+    width: 3.2rem !important;
+}
+.w-100 {
+    width: 100vh !important;
+    background-color: red;
+}
+
+.h-1_3 {
+    height: 1.3rem;
+}
+
+.h-1_5 {
+    height: 1.5rem;
+}
+
+.h-1_1 {
+    height: 1.1rem;
+}
+.h-1_2 {
+    height: 1.3rem;
+}
+
+.h-1 {
+    height: 1rem;
+}
+
+.h-3 {
+    width: 3rem;
+}
+
+.h-4 {
+    width: 4rem;
+}
+
+.text-pt-9 {
+    vertical-align: middle;
+    font-size: 13pt;
+    display: inline-block;
+}
+/* FIM TAMANHOS */
+
+/* torna tudo não selecionavel */
+.naoSelecionavel {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* header */
+.nav-separator {
+    border-top: 0.1rem solid var(--cor-nav-separator);
+}
+
+.nav-image {
+    width: 1.48rem;
+    text-align: center;
+}
+
+/* nav */
+
+.conteudo img,
+.conteudo span {
+    display: inline-block;
+    vertical-align: middle; /* alinha verticalmente */
+    font-size: 15pt;
+}
+.hover-pointer:hover {
+    cursor: pointer;
+}
+
+/* Filtros */
+.blue-img img {
+    filter: invert(30%) sepia(95%) saturate(2543%) hue-rotate(208deg)
+        brightness(96%) contrast(106%);
+}
+
+.red-img img {
+    filter: invert(34%) sepia(59%) saturate(3171%) hue-rotate(333deg)
+        brightness(87%) contrast(98%);
+}
+
+.white-img:hover img {
+    filter: invert(97%) sepia(100%) saturate(2%) hue-rotate(247deg)
+        brightness(108%) contrast(100%);
+}
+
+/* Filtros do sla */
+.red {
+    filter: invert(10%) sepia(100%) saturate(7171%) hue-rotate(360deg)
+        brightness(99%) contrast(108%);
+}
+body[data-bs-theme="dark"] .red {
+    filter: invert(27%) sepia(97%) saturate(1723%) hue-rotate(332deg) brightness(98%) contrast(98%);
+}
+
+.green {
+    filter: invert(59%) sepia(22%) saturate(7017%) hue-rotate(81deg)
+        brightness(117%) contrast(124%);
+}
+body[data-bs-theme="dark"] .green {
+    filter: invert(59%) sepia(22%) saturate(7017%) hue-rotate(81deg)
+        brightness(117%) contrast(124%);
+}
+
+.laranja {
+    filter: invert(75%) sepia(72%) saturate(2172%) hue-rotate(353deg)
+        brightness(108%) contrast(103%);
+}
+body[data-bs-theme="dark"] .laranja {
+    filter: invert(65%) sepia(38%) saturate(3786%) hue-rotate(2deg) brightness(107%) contrast(104%);
+}
+
+.brilho {
+    filter: contrast(175%) brightness(3%);
+}
+body[data-bs-theme="dark"] .brilho {
+    filter: contrast(200%) brightness(150%);
+}
+body[data-bs-theme="dark"] .color-line {
+    filter: invert(99%) sepia(69%) saturate(2%) hue-rotate(114deg) brightness(109%) contrast(100%);
+}
+
+/* FIM Filtros */
+
+/* corpo details */
+.card {
+    background-color: var(--cor-white); /* Fundo branco */
+    border: none;
+    box-shadow: 0 4px 6px var(--black-shadow);
+}
+
+.card-header {
+    background-color: var(--cor-card-header-blue); /* Azul */
+    color: var(--cor-white);
+    font-weight: bold;
+}
+
+.stats {
+    background: var(--cor-stats-blue);
+    display: inline;
+    color: var(--cor-white) !important;
+    font-weight: bold;
+    padding: 2px 3px !important;
+}
+
+.inline-block {
+    display: inline-block !important;
+}
+
+.nav-tabs .nav-link {
+    color: var(--cor-cinza); /* Cor padrão para abas não ativas */
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--cor-black); /* Cor ao passar o mouse */
+}
+
+.progress-container {
+    position: relative;
+}
+.progress-bar {
+    height: 30px;
+}
+.waypoints {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.waypoint {
+    width: 2.188rem;
+    height: 2.188rem;
+    background-color: white;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+.waypoint.active {
+    background-color: #007bff;
+    color: white;
+}
+.waypoint-label {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+.fonte-t {
+    font-size: 20pt !important;
+}
+
+/* pedidos */
+.form-control {
+    max-width: 20rem;
+}
+
+body {
+    position: relative;
+}
+#navbar-example3 {
+    top: 10rem;
+    position: absolute;
+    width: 15%;
+    max-height: 100vh;
+}
+.scrollspy-example-2 {
+    position: relative;
+    height: 31.25rem;
+    overflow: auto;
+}
+
+#selectedOptions {
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+.selected-option {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--cor-select-cinza-bg);
+    padding: 0.313rem 0.625rem;
+    margin: 0.313rem 0.313rem 0.313rem 0;
+    border: 1px solid var(--cor-select-cinza);
+    border-radius: 0.938rem;
+    font-size: 9pt;
+}
+.selected-option img:hover {
+    background-color: var(--cor-select-cinza-hover-bg);
+    border: 1px solid var(--cor-select-cinza-hover);
+}
+
+.delete-btn {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.delete-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.dropdown-item {
+    cursor: pointer; /* Define o cursor como 'pointer' */
+}
+.exit {
+    min-width: 10rem;
+}
+.text-exit {
+    font-size: 10pt;
+}
+
+.table-tr {
+    border-top: 0.2rem;
+    border-top: solid;
+    border-color: var(--cor-table-tr);
+}
+.btn-refresh {
+    border: none;
+    background-color: var(--cor-white);
+}
+
+/* SLA */
+.sla-red {
+    color: var(--cor-red) !important;
+    background-color: var(--cor-red-bg);
+    border-radius: 0.2rem;
+    display: inline;
+    font-weight: bold;
+    padding: 2px 3px !important;
+}
+
+.sla-green {
+    color: var(--cor-verde) !important;
+    background: var(--cor-verde-bg);
+    border-radius: 0.2rem;
+    display: inline;
+    font-weight: bold;
+    padding: 2px 3px !important;
+}
+
+.sla-laranja {
+    color: var(--cor-laranja) !important;
+    background: var(--cor-laranja-bg);
+    border-radius: 0.2rem;
+    display: inline;
+    font-weight: bold;
+    padding: 2px 3px !important;
+}
+/* FIM SLA */
+
+.pagination .page-item:first-child .page-link {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.pagination .page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+/* footer */
+footer {
+    position: end;
+    margin-top: 5rem;
+    bottom: 0;
+    width: 100%;
+    height: 7rem; /* Altura do footer */
+    background-color: var(--cor-footer); /* Cor de fundo do footer */
+
+    p {
+        text-align: center;
+    }
+}
+
+/* sem uso abaixo: */
