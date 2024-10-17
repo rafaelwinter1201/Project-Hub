@@ -133,10 +133,6 @@
             // Tema
             $('#theme-toggle').on('click', EventHandlers.themeToggleClick);
 
-            // Paginação
-            $('#page').on('blur', EventHandlers.pageBlur);
-            $('#page').on('keydown', EventHandlers.pageKeydown);
-
             // Filtro de Status
             document.getElementById("status").addEventListener("change", EventHandlers.statusChange);
 

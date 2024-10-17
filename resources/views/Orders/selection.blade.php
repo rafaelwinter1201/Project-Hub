@@ -4,26 +4,39 @@
 @section('content')
     <ul class="nav nav-tabs px-3 pt-3">
         <li class="nav-item">
-            <a class="nav-link {{ $aba == 'Todos' ? 'active' : '' }}" href="{{ route('orders', ['aba' => 'Todos']) }}"
-                data-toggle="tab">
+            <a class="nav-link active" href="{{ route('orders') }}" data-toggle="tab">
                 Todos
                 <span class="badge text-bg-warning" data-bs-toggle="tooltip"
-                    data-bs-title="Total">{{ $aba == 'Todos' ? $response['x-total-items'][0] : ' ' }}</span>
+                    data-bs-title="Total">{{ $response['x-total-items'][0] }}</span>
             </a>
         </li>
     </ul>
-
-    {{-- FILTRO (se vc está procurando pelo botão, ele está em components/pagination :) --}}
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                Filtros
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <form method="post" id="filtro">
+        @csrf
+        <div class="m-2">
+            <div class="row gx-0">
+                <div class="col">
+                    <p class="d-inline-flex gap-1 pt-3">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                            <img src="{{ asset('images/filter.png') }}" alt="refresh" class="h-1_2" />
+                            <spam class="text-pt-9">
+                                Filtros
+                            </spam>
+                        </button>
+                    </p>
+                </div>
+                <x-pagination :actualpage="$actualpage" :totalpage="$response['x-total-pages'][0]" />
+            </div>
         </div>
-        <div class="offcanvas-body">
-            <form method="post" id="filtro">
-                @csrf
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                    Filtros
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
                 <div class="row">
                     <div style="width: auto;">
                         <small>
@@ -100,12 +113,10 @@
                         Limpar
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
     <div class="m-2">
-        <x-pagination :actualpage="$actualpage" :totalpage="$response['x-total-pages'][0]" />
-
         <table class="table table-striped p-5 pt-5">
             <thead class="text-nowrap">
                 <tr class="table-tr">

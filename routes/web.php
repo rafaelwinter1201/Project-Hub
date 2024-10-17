@@ -18,32 +18,35 @@ Route::get('/', [LoginController::class, 'showLogin'])
 Route::post('/', [LoginController::class, 'Login'])
     ->name('login');
 
-Route::middleware([LoginAcc::class, Theme::class])->group(function () { // need authentication
+Route::middleware([LoginAcc::class, Theme::class])->group(function () { // needed authentication
     Route::get('/Dashboard', [DashboardController::class, 'Dashboard'])
         ->name('dashboard');
 
-    Route::get('/Orders/{aba}', [OrdersController::class, 'orders'])
+    // Pedidos
+    Route::get('/Orders', [OrdersController::class, 'orders'])
         ->name('orders');
-    Route::post('/Orders/{aba}', [OrdersController::class, 'filter'])
+    Route::post('/Orders', [OrdersController::class, 'filter'])
         ->name('orders');
 
+    // Detalhes
     Route::get('/Detalhes/{idpedido}', [DetailsController::class, 'details'])
         ->name('details');
 
+    // Etiqueta
     Route::get('/Etiqueta/{idpedido}', [LabelController::class, 'label'])
         ->name('label');
 
+    // finalizar sessão
     Route::get('/logout', [LogOutController::class, 'logout'])
         ->name('logout');
 
+    // Testes
     Route::get('/Teste', [TesteController::class, 'teste'])
         ->name('teste');
     Route::post('/Teste', [TesteController::class, 'teste'])
         ->name('teste');
 
-    // api ajax
+    // Api ajax
     Route::post('/theme', [ThemeController::class, 'theme'])
         ->name('theme');
-    Route::post('/filter', [FilterController::class, 'filter'])
-        ->name('filter');
 });

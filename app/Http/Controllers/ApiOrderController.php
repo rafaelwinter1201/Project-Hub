@@ -14,18 +14,14 @@ class ApiOrderController extends Controller
     {
         self::init();
 
-        $query = $request->query();
-
-        $post = $request->post();
-
-        $post['limit'] = isset($post['limit']) ? $post['limit'] : 10; // Default limit
+        $post = (array) $request->post();
         
-        $params = self::getParams(array_merge($post, $query), $id);
+        $params = (string) self::getParams($post, $id);
 
         $client = new Client();
 
         try {
-            $response = $client->request('GET', getenv('APIURL') . '/orders' . $params, [
+            $response = $client->request('GET', getenv('APIURL') . '/orders?' . $params, [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Bearer ' . $_SESSION['user']['webToken'] // Utiliza o token da sessão
@@ -37,10 +33,9 @@ class ApiOrderController extends Controller
             return [
                 'httpStatus' => $response->getStatusCode(),
                 'body' => $body,
-                'x-items-per-page' => $post['limit'],
+                'x-items-per-page' => isset($post['limit']) ? $post['limit'] : 10,
                 'x-total-items' => $response->getHeaders()['X-Total-Items'],
-                'x-total-pages' => $response->getHeaders()['X-Total-Pages'],
-                'filtros' => $post
+                'x-total-pages' => $response->getHeaders()['X-Total-Pages']
             ];
         } catch (RequestException  $e) {
             if ($e->hasResponse()) {
@@ -60,6 +55,8 @@ class ApiOrderController extends Controller
 
         $filtros = [];
 
+        $vars['limit'] = isset($vars['limit']) ? $vars['limit'] : 10; // Default limit
+        
         $page = isset($vars['page']) ? $vars['page'] : 1;
 
         $filtros[] = 'page=' . $page . '&limit=' . $vars['limit'];

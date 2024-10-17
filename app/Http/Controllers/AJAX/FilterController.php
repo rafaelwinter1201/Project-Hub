@@ -22,8 +22,10 @@ class FilterController extends Controller
             echo 'Nenhum pedido encontrado com estes filtros!';
             exit;
         }
+        
+        //aqui vai ficar a parte de paginação
         $actualpage = $request->query('page') ? $request->query('page') : 1;
 
-        return view('orders.orders', compact('response'));
+        return view('orders.orders', compact('response', 'actualpage'));
     }
 }

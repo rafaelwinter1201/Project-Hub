@@ -9,40 +9,27 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-    public function orders(string $aba, Request $request)
+    public function orders(Request $request)
     {
-        self::validateAba($aba);
-
         $ObApiOrderController = new ApiOrderController;
         $response = (array) $ObApiOrderController->orders($request);
-        (array) $postVars = [];
+        //inicia com valores padrão
+        (array) $filtros = [];
         $actualpage = 1;
+        echo "essa página é um get";
 
-        return view('orders.selection', compact('aba', 'response', 'actualpage'))->with('postVars', $postVars);
+        return view('orders.selection', compact('response', 'actualpage', 'filtros'));
     }
-    public function filter(string $aba, Request $request)
+    public function filter(Request $request)
     {
-        self::validateAba($aba);
-        $query = $request->query();
-
-        $post = $request->post();
-        $postVars = array_merge($query, $post);
-        echo "<pre>";
-        print_r($postVars);
-        echo "</pre>";
-
+        echo "essa página é um post";
+        
         $ObApiOrderController = new ApiOrderController;
-        $response = (array) $ObApiOrderController->orders($request);  
+        $response = (array) $ObApiOrderController->orders($request);
 
-        return view('orders.selection', compact('response', 'aba', 'actualpage'))->with('postVars', $postVars);
-    }
+        $actualpage = $response;
+        $filtros = $request->post();
 
-    public function validateAba(string $aba): void
-    {
-        $validAbaValues = ['Todos', 'Cancelados', 'Aberto'];
-
-        if (!in_array($aba, $validAbaValues)) {
-            abort(404); // Aborta a execução e exibe a página 404
-        }
+        return view('orders.selection', compact('response', 'actualpage', 'filtros'));
     }
 }
