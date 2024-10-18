@@ -4,15 +4,17 @@
 @section('content')
     <ul class="nav nav-tabs px-3 pt-3">
         <li class="nav-item">
-            <a class="nav-link active" href="{{ route('orders') }}" data-toggle="tab">
+            <a class="nav-link active" href="" data-toggle="tab">
                 Todos
                 <span class="badge text-bg-warning" data-bs-toggle="tooltip"
-                    data-bs-title="Total">{{ $response['x-total-items'][0] }}</span>
+                    data-bs-title="Total">{{ $response['x-total-items'] }}</span>
             </a>
         </li>
     </ul>
     <form method="post" id="filtro">
         @csrf
+        <!-- BOTÕES OCULTOS PARA CONTROLE DE NEXT > E PREVIEW < -->
+        <input type="hidden" id="buttonPressed" name="buttonPressed" value="">
         <div class="m-2">
             <div class="row gx-0">
                 <div class="col">
@@ -26,7 +28,7 @@
                         </button>
                     </p>
                 </div>
-                <x-pagination :actualpage="$actualpage" :totalpage="$response['x-total-pages'][0]" />
+                <x-pagination :actualpage="$actualpage" :totalpage="$response['x-total-pages']" />
             </div>
         </div>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -43,7 +45,7 @@
                             <b>Id do pedido:</b>
                         </small>
                         <input type="text" class="form-control" name="search"
-                            value="{{ isset($response['filtros']['search']) ? $response['filtros']['search'] : '' }}"
+                            value="{{ isset($filtros['search']) ? $filtros['search'] : '' }}"
                             placeholder="Buscar pelo id..." id="search" style="padding-left: -100px;" />
                     </div>
                     <div class="d-inline-block" style="width: auto;">
@@ -99,11 +101,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        <!-- DATA INICIO E DATA FIM -->
                         <livewire:data-range />
                     </div>
                 </div>
                 <div class="pt-3">
-                    <button type="submit" class="btn btn-outline-primary white-img blue-img">
+                    <button type="submit" class="btn btn-outline-primary white-img blue-img" id="filtrar">
                         <img src="{{ asset('images/search.png') }}" alt="search" class="h-1_3" />
                         Filtrar
                     </button>
@@ -120,12 +123,7 @@
         <table class="table table-striped p-5 pt-5">
             <thead class="text-nowrap">
                 <tr class="table-tr">
-                    <th scope="col">
-                        <a>
-                            <img src="{{ asset('images/refresh.png') }}" alt="refresh" class="h-1_1 color-line" />
-                        </a>
-                        Fornecedor
-                    </th>
+                    <th scope="col">Fornecedor</th>
                     <th scope="col">SKUs</th>
                     <th scope="col">Id do pedido</th>
                     <th scope="col">Data de criação</th>

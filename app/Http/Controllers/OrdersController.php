@@ -16,18 +16,17 @@ class OrdersController extends Controller
         //inicia com valores padrão
         (array) $filtros = [];
         $actualpage = 1;
-        echo "essa página é um get";
 
         return view('orders.selection', compact('response', 'actualpage', 'filtros'));
     }
     public function filter(Request $request)
-    {
+    {        
         echo "essa página é um post";
         
         $ObApiOrderController = new ApiOrderController;
         $response = (array) $ObApiOrderController->orders($request);
 
-        $actualpage = $response;
+        $actualpage = 1;
         $filtros = $request->post();
 
         return view('orders.selection', compact('response', 'actualpage', 'filtros'));

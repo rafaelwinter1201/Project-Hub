@@ -49,4 +49,6 @@ Route::middleware([LoginAcc::class, Theme::class])->group(function () { // neede
     // Api ajax
     Route::post('/theme', [ThemeController::class, 'theme'])
         ->name('theme');
+    Route::post('/filter', [FilterController::class, 'filter'])
+        ->name('filter');
 });

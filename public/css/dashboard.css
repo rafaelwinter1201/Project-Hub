@@ -200,7 +200,9 @@ body[data-bs-theme="dark"] .brilho {
 body[data-bs-theme="dark"] .color-line {
     filter: invert(99%) sepia(69%) saturate(2%) hue-rotate(114deg) brightness(109%) contrast(100%);
 }
-
+body[data-bs-theme="dark"] .brilho-close {
+    filter: invert(99%) sepia(69%) saturate(2%) hue-rotate(114deg) brightness(109%) contrast(100%);
+}
 /* FIM Filtros */
 
 /* corpo details */
@@ -208,6 +210,9 @@ body[data-bs-theme="dark"] .color-line {
     background-color: var(--cor-white); /* Fundo branco */
     border: none;
     box-shadow: 0 4px 6px var(--black-shadow);
+}
+.fullvh{
+    height: 70vh !important; 
 }
 
 .card-header {

@@ -95,7 +95,7 @@ class Util extends Model
                 break;
             case 'Cancelado':
                 return [
-                    'cancelled'
+                    'canceled'
                 ];
                 break;
             case 'Impedimento':

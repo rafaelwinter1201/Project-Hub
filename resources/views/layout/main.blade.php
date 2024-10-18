@@ -67,27 +67,6 @@
                 );
             },
 
-            pageBlur: function() {
-                var page = $('#page').val();
-                if (page) {
-                    Utils.ajaxRequest('{{ route('theme') }}', 'POST', {
-                            page: page
-                        },
-                        function(response) {
-                            $('#page').val(page);
-                            Utils.updateTable(response);
-                        }
-                    );
-                }
-            },
-
-            pageKeydown: function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    EventHandlers.pageBlur();
-                }
-            },
-
             statusChange: function() {
                 var selectedValue = this.value;
                 if (selectedValue !== "") {
@@ -97,7 +76,8 @@
 
                     var deleteBtn = document.createElement("span");
                     deleteBtn.className = "delete-btn";
-                    deleteBtn.innerHTML = '<img src="{{ asset('images/close.png') }}" alt="delete">';
+                    deleteBtn.innerHTML =
+                        '<img src="{{ asset('images/close.png') }}" alt="delete" class="brilho-close">';
                     deleteBtn.onclick = function() {
                         var selectedOptionsDiv = document.getElementById("selectedOptions");
                         selectedOptionsDiv.removeChild(newOptionSpan);
@@ -141,16 +121,11 @@
             tooltipTriggerList.forEach(function(tooltipTriggerEl) {
                 new bootstrap.Tooltip(tooltipTriggerEl);
             });
-
-            // Inicialização de outras funcionalidades
-            // (Adicione mais inicializações aqui conforme necessário)
         });
 
         // Função de exemplo para inicializar o estado inicial ou outros elementos
         function initializeApp() {
-            var selectedOptions = {!! !empty($response['filtros']['selectedOptions'])
-                ? json_encode($response['filtros']['selectedOptions'])
-                : '[]' !!}; // Mudando de '""' para '[]'
+            var selectedOptions = {!! !empty($filtros['selectedOptions']) ? json_encode($filtros['selectedOptions']) : '[]' !!}; // Mudando de '""' para '[]'
 
             // Verifica se selectedOptions é um array
             if (!Array.isArray(selectedOptions)) {
@@ -164,7 +139,8 @@
 
                 var deleteBtn = document.createElement("span");
                 deleteBtn.className = "delete-btn";
-                deleteBtn.innerHTML = '<img src="{{ asset('images/close.png') }}" alt="delete">';
+                deleteBtn.innerHTML =
+                    '<img src="{{ asset('images/close.png') }}" alt="delete" class="brilho-close">';
                 deleteBtn.onclick = function() {
                     var selectedOptionsDiv = document.getElementById("selectedOptions");
                     selectedOptionsDiv.removeChild(newOptionSpan);
@@ -195,6 +171,60 @@
                 });
             });
         }
+        $(document).ready(function() {
+            // Evento para o botão de filtrar
+            $('#filtro').on('submit', function(e) {
+                e.preventDefault(); // Evita o envio normal do formulário
+                var formData = $(this).serialize(); // Serializa os dados do formulário
+
+                // Envia o formulário via AJAX usando a função Utils
+                Utils.ajaxRequest('{{ route('filter') }}', 'POST', formData, function(response) {
+                    // Lógica de sucesso - MEXER AQUI EM CASO DE SUCESSO
+                    console.log(response)
+                    Utils.updateTable(response);
+                }, function(xhr, status, error) {
+                    // Lógica de erro
+                    console.error(xhr.responseText);
+                });
+            });
+
+            // Evento para o botão de navegação "Anterior"
+            $('#botaoAnterior').on('click', function(e) {
+                e.preventDefault(); // Evita o comportamento padrão do link
+                $('#buttonPressed').val('botaoAnterior'); // Define o valor no campo oculto
+                console.log('Botão pressionado:', $('#buttonPressed').val()); // Verifica o valor
+                $('#filtro').submit(); // Envia o formulário
+            });
+
+            // Evento para o botão de navegação "Próximo"
+            $('#botaoProximo').on('click', function(e) {
+                e.preventDefault(); // Evita o comportamento padrão do link
+                $('#buttonPressed').val('botaoProximo'); // Define o valor no campo oculto
+                console.log('Botão pressionado:', $('#buttonPressed').val()); // Verifica o valor
+                $('#filtro').submit(); // Envia o formulário
+            });
+
+            $('#page').on('blur', function() {
+                $('#filtro').submit(); // Envia o formulário
+            });
+
+            // Evento para o botão de navegação "Próximo"
+            $('#filtrar').on('click', function() {
+                $('#filtro').submit(); // Envia o formulário
+            });
+
+            // Evento para o filtro de data de criação
+            $('#startDate').on('change', function() {
+                // Verifica se há uma data válida no startDate
+                if ($(this).val()) {
+                    // Se houver, habilita o campo endDate
+                    $('#endDate').removeClass('disabled').prop('disabled', false);
+                } else {
+                    // Se não houver data, desabilita o campo endDate
+                    $('#endDate').addClass('disabled').prop('disabled', true);
+                }
+            });
+        });
 
 
         // Inicialização da aplicação
@@ -214,6 +244,8 @@
             while (selectedOptionsDiv.firstChild) {
                 selectedOptionsDiv.removeChild(selectedOptionsDiv.firstChild);
             }
+
+            $('#endDate').addClass('disabled').prop('disabled', true);
 
             // Remove todos os inputs ocultos
             var hiddenInputs = document.querySelectorAll('input[name="selectedOptions[]"]');
