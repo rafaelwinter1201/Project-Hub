@@ -19,8 +19,7 @@ class FilterController extends Controller
             exit;
         } elseif (!$response['body']){
             //dps trato isso
-            echo 'Nenhum pedido encontrado com estes filtros!';
-            exit;
+            return view('errors.errors');
         }
 
         return view('Orders.orders', compact('response'));

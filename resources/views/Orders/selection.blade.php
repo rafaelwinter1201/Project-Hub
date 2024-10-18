@@ -119,7 +119,7 @@
             </div>
         </div>
     </form>
-    <div class="m-2">
+    <div class="m-2" style="min-height: 60vh">
         <table class="table table-striped p-5 pt-5">
             <thead class="text-nowrap">
                 <tr class="table-tr">

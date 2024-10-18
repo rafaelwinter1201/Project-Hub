@@ -378,6 +378,9 @@ body {
 }
 /* FIM SLA */
 
+.page-link{
+    cursor: pointer;
+}
 .pagination .page-item:first-child .page-link {
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;

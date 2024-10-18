@@ -51,7 +51,7 @@
                     </div>
                 </a>
                 <a class="nav-link {{ Route::is('orders') ? 'active' : '' }}"
-                    href="{{ route('orders', ['aba' => 'Todos']) }}">
+                    href="{{ route('orders') }}">
                     <div class="conteudo">
                         <img class="nav-image {{ Route::is('orders') ? 'brilho' : '' }}"
                             src="{{ asset('images/way.png') }}" alt="Logo Pedidos" />

@@ -182,12 +182,13 @@ class Util extends Model
         return $data;
     }
 
-    public static function getTimeline($status)
+    public static function getTimeline($statusAtual)
     {
-        $statusAtual = 'Enviado'; //self::getNameStatus($status);
         // Pendente > Processado > Facturado > Realizado > Enviado > Concluido
 
         // Cancelado | Fraude | Em Espera
+
+        $statusAtual = self::getNameStatus($statusAtual);
 
         $statusProgressoName = 'Cancelado';
         if ($statusAtual == 'Fraude' || $statusAtual == 'Em Espera') {

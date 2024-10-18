@@ -18,6 +18,13 @@ Route::get('/', [LoginController::class, 'showLogin'])
 Route::post('/', [LoginController::class, 'Login'])
     ->name('login');
 
+Route::fallback(function () {
+        return response()->view('errors.fallback', [
+            'code' => 404,
+            'message' => 'Página não encontrada!',
+        ], 404);
+    });
+
 Route::middleware([LoginAcc::class, Theme::class])->group(function () { // needed authentication
     Route::get('/Dashboard', [DashboardController::class, 'Dashboard'])
         ->name('dashboard');
@@ -52,3 +59,5 @@ Route::middleware([LoginAcc::class, Theme::class])->group(function () { // neede
     Route::post('/filter', [FilterController::class, 'filter'])
         ->name('filter');
 });
+
+
