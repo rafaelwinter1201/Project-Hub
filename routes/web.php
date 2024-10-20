@@ -7,6 +7,7 @@ use App\Http\Controllers\LabelController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PDF\PDFDanfeController;
 use App\Http\Controllers\Teste\TesteController;
 use App\Http\Controllers\Theme\ThemeController;
 use App\Http\Middleware\LoginAcc;
@@ -42,6 +43,9 @@ Route::middleware([LoginAcc::class, Theme::class])->group(function () { // neede
     // Etiqueta
     Route::get('/Etiqueta/{idpedido}', [LabelController::class, 'label'])
         ->name('label');
+    // DANFE
+    Route::get('/Nota-Fiscal/{idpedido}', [PDFDanfeController::class, 'danfe'])
+        ->name('danfe');
 
     // finalizar sessão
     Route::get('/logout', [LogOutController::class, 'logout'])

@@ -83,26 +83,32 @@
                         selectedOptionsDiv.removeChild(newOptionSpan);
                         hiddenInput.remove();
 
-                        // Re-add the option to the select
-                        var option = document.createElement("option");
-                        option.value = selectedValue;
-                        option.textContent = selectedValue;
-                        document.getElementById("status").appendChild(option);
+                        // Reexibe a opção no select em vez de recriar
+                        Array.from(document.getElementById("status").options).forEach(function(option) {
+                            if (option.value === selectedValue) {
+                                option.hidden = false; // Reexibe a opção
+                            }
+                        });
                     };
 
                     newOptionSpan.appendChild(deleteBtn);
                     document.getElementById("selectedOptions").appendChild(newOptionSpan);
 
-                    // Add a hidden input to the form
+                    // Adiciona um input oculto ao form
                     var hiddenInput = document.createElement("input");
                     hiddenInput.type = "hidden";
                     hiddenInput.name = "selectedOptions[]";
                     hiddenInput.value = selectedValue;
                     document.getElementById("filtro").appendChild(hiddenInput);
 
-                    // Remove the selected option from the select
-                    this.options[this.selectedIndex].remove();
-                    // Reset the select value
+                    // Oculta a opção selecionada do select
+                    Array.from(this.options).forEach(function(option) {
+                        if (option.value === selectedValue) {
+                            option.hidden = true;
+                        }
+                    });
+
+                    // Reseta o valor do select
                     this.value = "";
                 }
             }
@@ -116,12 +122,16 @@
             // Filtro de Status
             document.getElementById("status").addEventListener("change", EventHandlers.statusChange);
 
+            loadTooltip();
+        });
+
+        function loadTooltip() {
             // Tooltips
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
             tooltipTriggerList.forEach(function(tooltipTriggerEl) {
                 new bootstrap.Tooltip(tooltipTriggerEl);
             });
-        });
+        }
 
         // Função de exemplo para inicializar o estado inicial ou outros elementos
         function initializeApp() {
@@ -180,8 +190,11 @@
                 // Envia o formulário via AJAX usando a função Utils
                 Utils.ajaxRequest('{{ route('filter') }}', 'POST', formData, function(response) {
                     // Lógica de sucesso - MEXER AQUI EM CASO DE SUCESSO
-                    console.log(response)
                     Utils.updateTable(response);
+                    //reinicia os tooltip
+                    loadTooltip();
+                    //reinicia copy
+                    initializeCopy()
                 }, function(xhr, status, error) {
                     // Lógica de erro
                     console.error(xhr.responseText);
@@ -252,51 +265,42 @@
             hiddenInputs.forEach(function(input) {
                 input.remove();
             });
-            // Re-adiciona todas as opções removidas ao select status
+
+            // Restaura todas as opções removidas, apenas removendo o atributo "hidden"
             var selectElement = document.getElementById("status");
-            var selectedOptions = ""; // Adapte isso conforme necessário
-            selectedOptions.forEach(function(optionValue) {
-                var option = document.createElement("option");
-                option.value = optionValue;
-                option.textContent = optionValue;
-                selectElement.appendChild(option);
+            Array.from(selectElement.options).forEach(function(option) {
+                option.hidden = false; // Reexibe as opções que foram escondidas
             });
-        };
-        // Seleciona todos os itens de dropdown com a classe 'copy-text'
-        const dropdownItems = document.querySelectorAll(".copy-text");
+        }
 
-        // Adiciona um listener de evento de clique para cada item de dropdown
-        dropdownItems.forEach((item) => {
-            item.addEventListener("click", function(event) {
-                // Previne o comportamento padrão do link
-                event.preventDefault();
+        function initializeCopy() {
+            // Seleciona todos os itens de dropdown com a classe 'copy-text'
+            const dropdownItems = document.querySelectorAll(".copy-text");
 
-                // Obtém o texto do atributo 'data-text'
-                const textToCopy = this.getAttribute("data-text");
+            // Adiciona um listener de evento de clique para cada item de dropdown
+            dropdownItems.forEach((item) => {
+                item.addEventListener("click", function(event) {
+                    // Previne o comportamento padrão do link
+                    event.preventDefault();
 
-                // Cria um elemento de texto temporário
-                const tempTextarea = document.createElement("textarea");
-                tempTextarea.value = textToCopy;
+                    // Obtém o texto do atributo 'data-text'
+                    const textToCopy = this.getAttribute("data-text");
 
-                // Adiciona o elemento de texto temporário ao DOM
-                document.body.appendChild(tempTextarea);
-
-                // Seleciona todo o texto no elemento de texto temporário
-                tempTextarea.select();
-
-                // Copia o texto para a área de transferência
-                document.execCommand("copy");
-
-                // Remove o elemento de texto temporário do DOM
-                document.body.removeChild(tempTextarea);
-
-                // Exibe o toast de sucesso
-                const copyToast = new bootstrap.Toast(
-                    document.getElementById("copyToast")
-                );
-                copyToast.show();
+                    // Usa a API moderna de clipboard para copiar o texto
+                    navigator.clipboard.writeText(textToCopy)
+                        .then(() => {
+                            // Exibe o toast de sucesso
+                            const copyToast = new bootstrap.Toast(
+                                document.getElementById("copyToast")
+                            );
+                            copyToast.show();
+                        })
+                        .catch((err) => {
+                            console.error("Erro ao copiar o texto: ", err);
+                        });
+                });
             });
-        });
+        }
     </script>
     @livewireScripts
 

@@ -82,10 +82,10 @@
                         <b>Prazo:</b>
                     </small>
                     <select class="form-select" disabled id="tempoSLA" name="tempoSLA">
-                        <option value="" selected disabled>Selecione as opções...</option>
-                        <option value="vencido">Vencido</option>
-                        <option value="perto">Próximo de vencer</option>
-                        <option value="dentro">Á vencer</option>
+                        <option value="" selected disabled>Selecione a opção...</option>
+                        <option value="atrasado">Vencido</option>
+                        <option value="vencendo">Próximo de vencer</option>
+                        <option value="pontual">Á vencer</option>
                     </select>
                 </div>
                 <div class="row">

@@ -19,7 +19,6 @@ class ApiController extends Controller
             'password' => $senhaHash
         ];
         try {
-            echo "oi";
             $response = $client->request('POST', getenv('APIURL') . '/auth/login', [
                 'headers' => [
                     'Content-Type' => 'application/json',

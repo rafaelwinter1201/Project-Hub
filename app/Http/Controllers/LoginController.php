@@ -39,7 +39,6 @@ class LoginController extends Controller
      */
     public function Login(Request $request){
         self::RedirectIfIsLogged();
-        echo "<p class='text-end'>estou aqui 2</p>";
         $login = [
             'username' => $request->get('username'),
             'password' => $request->get('password')
@@ -90,7 +89,6 @@ class LoginController extends Controller
     public static function RedirectIfIsLogged()
     {
         if(self::isLogged()) {
-            echo "<p class='text-end'>estou aqui 2</p>";
             return redirect()->route('dashboard');
         }
     }

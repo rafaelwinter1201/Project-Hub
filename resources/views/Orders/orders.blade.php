@@ -37,9 +37,11 @@
             </ul>
         </td>
         <td class="text-nowrap">
-            <a href="/Detalhes/{{ $order['detalhes']['codigo_plataforma'] }}" class="text-decoration-none text-reset"
-                data-bs-toggle="tooltip" data-bs-title="Ir para detalhes">
+            <a href="{{ route('details', ['idpedido' => $order['detalhes']['numero_de_pedido']]) }}"
+                class="text-decoration-none text-reset" data-bs-toggle="tooltip" data-bs-title="Ir para detalhes">
                 {{ $order['detalhes']['numero_de_pedido'] }}
+            </a>
+            <a class="copy-text hover-pointer" data-text="{{ $order['detalhes']['numero_de_pedido'] }}" data-bs-toggle="tooltip" data-bs-title="Copiar!">
                 <img src="{{ asset('images/redirect.png') }}" alt="redirecionar para detalhes" height="15rem" />
             </a>
         </td>
@@ -115,12 +117,7 @@
                 <img src="{{ asset('images/details.png') }}" class="h-1_5" alt="Mais informações" />
             </a>
             @if (!empty($order['faturamento']['nfe']))
-                <a href="#" target="_blank"
-                    class="link-offset-2 link-underline link-underline-opacity-0 color-line" data-bs-toggle="tooltip"
-                    data-bs-title="Imprimir Pedido de Compra">
-                    <img src="{{ asset('images/print.png') }}" class="h-1_5" alt="Imprimir" />
-                </a>
-                <a href="#" target="_blank"
+                <a href="{{ route('danfe', ['idpedido' => $order['detalhes']['numero_de_pedido']]) }}" target="_blank"
                     class="link-offset-2 link-underline link-underline-opacity-0 color-line" data-bs-toggle="tooltip"
                     data-bs-title="Imprimir Danfe">
                     <img src="{{ asset('images/barcode.png') }}" class="h-1_5" alt="Danfe" />
@@ -163,5 +160,5 @@
         $('#botaoAnterior').addClass('disabled');
         $('#botaoProximo').addClass('disabled');
     }
-    document.getElementById('total-page').textContent  = '{{ $response['x-total-pages'] }}';
+    document.getElementById('total-page').textContent = '{{ $response['x-total-pages'] }}';
 </script>

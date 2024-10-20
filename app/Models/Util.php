@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use DateInterval;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class Util extends Model
 {
@@ -230,5 +230,84 @@ class Util extends Model
             //opções selecionadas
             'percentualProgresso' => $percentualProgresso
         ]);
+    }
+
+    /**
+     * MÉTODO RESPONSÁVEL POR RETORNAR DATA FORMATADA
+     *
+     * @param string $date
+     * @return timestamp
+     */
+    public static function formatDate($date, $format = 'd/m/Y - H:i')
+    {
+        $timestamp = strtotime($date);
+        return date($format, $timestamp);
+    }
+
+    /**
+     * MÉTODO RESPONSAVEL POR FORMATAR UM NUMERO EM VALOR
+     *
+     * @param float $money
+     * @return float
+     */
+    public static function formatMoney($money)
+    {
+        return number_format($money, 2, ',', '.');
+    }
+
+    /**
+     * MÉTODO RESPONSÁVEL POR RETORNAR STRING COM PRIMEIRA LETRA MAIUSCULA
+     *
+     * @param string $status
+     * @return timestamp
+     */
+    public static function formataUcFisrt($text)
+    {
+        return ucfirst(strtolower($text));
+    }
+
+    /**
+     * MÉTODO RESPONSAVEL POR FORMATAR CPF OU CNPJ
+     *
+     * @param integer $documento
+     * @return string
+     */
+    public static function formatarCPFCNPJ($documento)
+    {
+        // Remove caracteres não numéricos
+        $documento = preg_replace("/[^0-9]/", "", $documento);
+
+        // Verifica se é CPF (11 dígitos) ou CNPJ (14 dígitos)
+        if (strlen($documento) === 11) {
+            // Formata CPF: 000.000.000-00
+            return substr($documento, 0, 3) . '.' . substr($documento, 3, 3) . '.' . substr($documento, 6, 3) . '-' . substr($documento, 9, 2);
+        } elseif (strlen($documento) === 14) {
+            // Formata CNPJ: 00.000.000/0000-00
+            return substr($documento, 0, 2) . '.' . substr($documento, 2, 3) . '.' . substr($documento, 5, 3) . '/' . substr($documento, 8, 4) . '-' . substr($documento, 12, 2);
+        } else {
+            // Retorna o documento sem formatação, caso não seja CPF nem CNPJ
+            return $documento;
+        }
+    }
+
+    /**
+     * METODO RESPONSAVEL POR RENDERIZAR O CODIGO DE BARRAS
+     *
+     * @param int $chave
+     * @return string
+     */
+    public static function getBarCode($chave)
+    {
+        //transforma chave em string
+        $str_chave = (string) $chave;
+
+        //instancia classe para gerar o codigo de barras
+        $generator = new BarcodeGeneratorPNG();
+
+        //gera o codigo de barras
+        $barcode = $generator->getBarcode($str_chave, $generator::TYPE_CODE_128, 1, 30);
+
+        //retorna o codigo de barras
+        return $barcode;
     }
 }
