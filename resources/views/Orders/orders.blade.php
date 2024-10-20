@@ -161,4 +161,5 @@
         $('#botaoProximo').addClass('disabled');
     }
     document.getElementById('total-page').textContent = '{{ $response['x-total-pages'] }}';
+    document.getElementById('Total').textContent = '{{ $response['x-total-items'] }}';
 </script>

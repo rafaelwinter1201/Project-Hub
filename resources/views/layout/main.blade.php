@@ -137,6 +137,8 @@
         function initializeApp() {
             var selectedOptions = {!! !empty($filtros['selectedOptions']) ? json_encode($filtros['selectedOptions']) : '[]' !!}; // Mudando de '""' para '[]'
 
+            initializeCopy()
+
             // Verifica se selectedOptions é um array
             if (!Array.isArray(selectedOptions)) {
                 selectedOptions = []; // Inicializa como array vazio se não for
@@ -194,7 +196,7 @@
                     //reinicia os tooltip
                     loadTooltip();
                     //reinicia copy
-                    initializeCopy()
+                    initializeCopy();
                 }, function(xhr, status, error) {
                     // Lógica de erro
                     console.error(xhr.responseText);
@@ -218,6 +220,9 @@
             });
 
             $('#page').on('blur', function() {
+                // Definindo o valor do campo hidden como vazio
+                $('#buttonPressed').val('');
+
                 $('#filtro').submit(); // Envia o formulário
             });
 

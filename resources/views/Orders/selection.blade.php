@@ -7,7 +7,7 @@
             <a class="nav-link active" href="" data-toggle="tab">
                 Todos
                 <span class="badge text-bg-warning" data-bs-toggle="tooltip"
-                    data-bs-title="Total">{{ $response['x-total-items'] }}</span>
+                    data-bs-title="Total" id="Total">{{ $response['x-total-items'] }}</span>
             </a>
         </li>
     </ul>
