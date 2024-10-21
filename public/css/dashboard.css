@@ -74,7 +74,9 @@ body[data-bs-theme="dark"] {
 .w-4_5 {
     width: 4.5rem !important;
 }
-
+.w-4 {
+    width: 4rem !important;
+}
 .w-3_5 {
     width: 3.2rem !important;
 }

@@ -279,13 +279,23 @@
                     // tirar campo desnecessario
                     unset($dados['fat']);
                 @endphp
-                @foreach ($dados as $item)
-                    <tr class="danfe_item">
-                        <td align="left">{{ $item['nDup'] }}</td>
-                        <td align="left">{{ $item['dVenc'] }}</td>
-                        <td align="left">R$ {{ $item['vDup'] }}</td>
-                    </tr>
-                @endforeach
+                @if (is_array($dados['dup']))
+                    @foreach ($dados['dup'] as $item)
+                        <tr class="danfe_item">
+                            <td align="left">{{ $item['nDup'] }}</td>
+                            <td align="left">{{ $item['dVenc'] }}</td>
+                            <td align="left">R$ {{ $item['vDup'] }}</td>
+                        </tr>
+                    @endforeach
+                @elseif (is_array($dados))
+                    @foreach ($dados as $item)
+                        <tr class="danfe_item">
+                            <td align="left">{{ $item['nDup'] }}</td>
+                            <td align="left">{{ $item['dVenc'] }}</td>
+                            <td align="left">R$ {{ $item['vDup'] }}</td>
+                        </tr>
+                    @endforeach
+                @endif
                 <tr>
                     <td class="danfe_item_ultimo" colspan="9">&nbsp;</td>
                 </tr>
@@ -454,8 +464,8 @@
                         <td align="left">{{ $Produto['prod']['xProd'] }}</td>
                         <td>{{ $Produto['prod']['NCM'] }}</td>
                         <td class="no-wrap">
-                            @if (isset($Produto['imposto']['PIS']['PISOutr']['CST']) && isset($Produto['imposto']['COFINS']['COFINSOutr']['CST']) )
-                                {{ $Produto['imposto']['PIS']['PISOutr']['CST'] . ' ' .  $Produto['imposto']['COFINS']['COFINSOutr']['CST'] }}
+                            @if (isset($Produto['imposto']['PIS']['PISOutr']['CST']) && isset($Produto['imposto']['COFINS']['COFINSOutr']['CST']))
+                                {{ $Produto['imposto']['PIS']['PISOutr']['CST'] . ' ' . $Produto['imposto']['COFINS']['COFINSOutr']['CST'] }}
                             @else
                                 --
                             @endif

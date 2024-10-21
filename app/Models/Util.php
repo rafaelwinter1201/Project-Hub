@@ -25,9 +25,9 @@ class Util extends Model
         // Impedimento
         switch ($status) {
             case 'pending':
+            case 'processing':
                 return 'Pendente';
                 break;
-            case 'processing':
             case 'processed':
                 return 'Processado';
                 break;
@@ -71,7 +71,6 @@ class Util extends Model
                 break;
             case 'Processado':
                 return [
-                    'processing',
                     'processed'
                 ];
                 break;
@@ -252,6 +251,10 @@ class Util extends Model
      */
     public static function formatMoney($money)
     {
+        $json = json_encode($money);
+        $money = (array) json_decode($json);
+        $money = isset($money[0]) ? $money[0] : $money;
+        
         return number_format($money, 2, ',', '.');
     }
 

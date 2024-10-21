@@ -138,6 +138,9 @@
             var selectedOptions = {!! !empty($filtros['selectedOptions']) ? json_encode($filtros['selectedOptions']) : '[]' !!}; // Mudando de '""' para '[]'
 
             initializeCopy()
+            //set max pages
+            document.getElementById('page').max =
+                '{{ isset($response['x-total-pages']) ? $response['x-total-pages'] : 1 }}';
 
             // Verifica se selectedOptions é um array
             if (!Array.isArray(selectedOptions)) {
@@ -187,6 +190,10 @@
             // Evento para o botão de filtrar
             $('#filtro').on('submit', function(e) {
                 e.preventDefault(); // Evita o envio normal do formulário
+
+                //revisa se a paginação está correta
+                checkpagination();
+
                 var formData = $(this).serialize(); // Serializa os dados do formulário
 
                 // Envia o formulário via AJAX usando a função Utils
@@ -247,12 +254,26 @@
 
         // Inicialização da aplicação
         document.addEventListener("DOMContentLoaded", initializeApp);
+
+        function checkpagination() {
+            var valor = parseInt(document.getElementById("page").value); // Converte o valor para inteiro
+            var maxPages =
+            {{ isset($response['x-total-pages']) ? $response['x-total-pages'] : 1 }}; // Obtém o total de páginas
+
+            if (valor < 1 || valor > maxPages) {
+                document.getElementById("page").value = 1; // Redefine para 1 se estiver fora do intervalo
+                // Exibe o toast de erro
+                const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
+                errorToast.show();
+            }
+        }
     </script>
     <script>
         function limparCampos() {
             // Limpa os campos de entrada
             document.getElementById("search").value = "";
             document.getElementById("status").value = "";
+            document.getElementById("limit").value = "10";
             document.getElementById("fornecedor").value = "";
             document.getElementById("startDate").value = "";
             document.getElementById("endDate").value = "";

@@ -162,4 +162,6 @@
     }
     document.getElementById('total-page').textContent = '{{ $response['x-total-pages'] }}';
     document.getElementById('Total').textContent = '{{ $response['x-total-items'] }}';
+
+    document.getElementById('page').max = '{{ $response['x-total-pages'] }}';
 </script>

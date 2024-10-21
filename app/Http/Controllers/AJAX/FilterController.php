@@ -19,7 +19,7 @@ class FilterController extends Controller
             exit;
         } elseif (!$response['body']){
             //dps trato isso
-            return view('errors.errors');
+            return view('errors.errors', compact('response'));
         }
 
         return view('Orders.orders', compact('response'));

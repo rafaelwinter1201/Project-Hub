@@ -71,7 +71,16 @@ class ApiOrderController extends Controller
         $filtros[] = 'page=' . $page;
 
         if (!empty($vars['search'])) { //caso venha um id do filtro
-            $filtros[] = 'platform_code=' . $vars['search'];
+            // Verifica se há um traço na string
+            if (strpos($vars['search'], '-') !== false) {
+                // Divide a string pelo traço e pega a última parte
+                $codigoSemTraco = explode('-', $vars['search'])[1];
+            } else {
+                // Se não houver traço, mantém o código como está
+                $codigoSemTraco = $vars['search'];
+            }
+
+            $filtros[] = 'platform_code=' . $codigoSemTraco;
         } elseif (isset($id)) { //caso venha o $id para o detalhes
             $idpedido = substr($id, 2); //remove id plataforma para busca
             $filtros[] = 'platform_code=' . $idpedido;

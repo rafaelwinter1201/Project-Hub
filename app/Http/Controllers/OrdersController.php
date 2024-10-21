@@ -20,9 +20,7 @@ class OrdersController extends Controller
         return view('orders.selection', compact('response', 'actualpage', 'filtros'));
     }
     public function filter(Request $request)
-    {        
-        echo "essa página é um post";
-        
+    {                
         $ObApiOrderController = new ApiOrderController;
         $response = (array) $ObApiOrderController->orders($request);
 
