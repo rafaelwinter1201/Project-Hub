@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
             View::composer('*', function ($view) {
                 $view->with('theme', $_SESSION['theme']);
             });
+        }
+
+        if (app()->environment('local')) {
+            URL::forceScheme('https');
         }
     }
 

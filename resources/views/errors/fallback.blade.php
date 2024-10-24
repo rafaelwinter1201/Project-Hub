@@ -41,7 +41,8 @@
         <h1>{{ $code }} - {{ $message }}</h1>
         <p>Desculpe-nos, ocorreu um erro inesperado.</p>
         <p>Tente novamente mais tarde.</p>
-        <p><a href="{{ route('dashboard') }}">Voltar para a página anterior</a></p>
+        <p><a href="{{ route('orders') }}">Voltar para a página anterior</a></p>
+        {{-- <p><a href="{{ route('dashboard') }}">Voltar para a página anterior</a></p> --}}
     </div>
 </body>
 </html>

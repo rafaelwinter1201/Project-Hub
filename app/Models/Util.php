@@ -111,6 +111,12 @@ class Util extends Model
     }
     public static function getSla($sla)
     {
+        // configura prazo
+        $setDiasExpiracao = 12;
+
+        //configura prazo próximo de vencer
+        $setDiasPrazoPerto = 3;
+
         // Define o timezone para o Brasil
         date_default_timezone_set('America/Sao_Paulo');
 
@@ -119,7 +125,7 @@ class Util extends Model
         $dataAtual = new DateTime();
 
         // Adicionar 12 dias úteis à data recebida
-        $dataExpiracao = self::adicionarDiasUteis(clone $dataInicial, 5);
+        $dataExpiracao = self::adicionarDiasUteis(clone $dataInicial, $setDiasExpiracao);
 
         // Verificar se a data de expiração está no futuro ou no passado
         $cor = '';
@@ -132,7 +138,7 @@ class Util extends Model
             $dias = $intervaloRestante->days;
             $horas = $intervaloRestante->h;
 
-            if ($dias <= 3) {
+            if ($dias <= $setDiasPrazoPerto) {
                 $cor = 'laranja';
             } else {
                 $cor = 'green';

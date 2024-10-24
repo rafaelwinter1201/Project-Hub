@@ -27,8 +27,8 @@ Route::fallback(function () {
     });
 
 Route::middleware([LoginAcc::class, Theme::class])->group(function () { // needed authentication
-    Route::get('/Dashboard', [DashboardController::class, 'Dashboard'])
-        ->name('dashboard');
+    // Route::get('/Dashboard', [DashboardController::class, 'Dashboard'])
+    //     ->name('dashboard');
 
     // Pedidos
     Route::get('/Orders', [OrdersController::class, 'orders'])

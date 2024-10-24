@@ -23,7 +23,8 @@ class LoginController extends Controller
      */
     public function showLogin(){
         if(self::isLogged()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('orders');
+            // return redirect()->route('dashboard');
         }
         
         return view('Login.Login',[
@@ -49,7 +50,8 @@ class LoginController extends Controller
         
         if(!isset($response['body'])){
             self::startSession($response);
-            return redirect()->route('dashboard');
+            //return redirect()->route('dashboard');
+            return redirect()->route('orders');
         }
         return view('Login.Login',[
             'user' => $login['username'],
@@ -89,7 +91,8 @@ class LoginController extends Controller
     public static function RedirectIfIsLogged()
     {
         if(self::isLogged()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('orders');
+            //return redirect()->route('dashboard');
         }
     }
 }

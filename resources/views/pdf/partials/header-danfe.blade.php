@@ -66,7 +66,7 @@
         </table>
         <p class="danfe_cabecalho_numero">N&ordm; {{$ObjXML->nNF}}</p>
         <p class="danfe_cabecalho_danfe_texto">
-          SERIE: {{$ObjXML->serieNF}}<br />P&aacute;gina: {{$ObjXML->pagAtual}} de {{$ObjXML->pagTotal}}
+          SERIE: {{$ObjXML->serieNF}}<br />P&aacute;gina: 1 de 1
         </p>
       </td>
       <td
