@@ -206,6 +206,7 @@
                     loadTooltip();
                     //reinicia copy
                     initializeCopy();
+                    console.log(formData);
                 }, function(xhr, status, error) {
                     // Lógica de erro
                     console.error(xhr.responseText);
@@ -216,7 +217,6 @@
             $('#botaoAnterior').on('click', function(e) {
                 e.preventDefault(); // Evita o comportamento padrão do link
                 $('#buttonPressed').val('botaoAnterior'); // Define o valor no campo oculto
-                console.log('Botão pressionado:', $('#buttonPressed').val()); // Verifica o valor
                 $('#filtro').submit(); // Envia o formulário
             });
 
@@ -224,19 +224,19 @@
             $('#botaoProximo').on('click', function(e) {
                 e.preventDefault(); // Evita o comportamento padrão do link
                 $('#buttonPressed').val('botaoProximo'); // Define o valor no campo oculto
-                console.log('Botão pressionado:', $('#buttonPressed').val()); // Verifica o valor
                 $('#filtro').submit(); // Envia o formulário
             });
 
             $('#page').on('blur', function() {
                 // Definindo o valor do campo hidden como vazio
                 $('#buttonPressed').val('');
-
                 $('#filtro').submit(); // Envia o formulário
             });
 
             // Evento para o botão de navegação "Próximo"
             $('#filtrar').on('click', function() {
+                document.getElementById('page').value = 1;
+                $('#buttonPressed').val('');
                 $('#filtro').submit(); // Envia o formulário
             });
 
@@ -260,7 +260,7 @@
         function checkpagination() {
             var valor = parseInt(document.getElementById("page").value); // Converte o valor para inteiro
             var maxPages =
-            {{ isset($response['x-total-pages']) ? $response['x-total-pages'] : 1 }}; // Obtém o total de páginas
+                {{ isset($response['x-total-pages']) ? $response['x-total-pages'] : 1 }}; // Obtém o total de páginas
 
             if (valor < 1 || valor > maxPages) {
                 document.getElementById("page").value = 1; // Redefine para 1 se estiver fora do intervalo

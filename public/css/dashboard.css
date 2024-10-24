@@ -8,9 +8,10 @@
     --cor-cinza: #494949;
     --black-shadow: #0000001a;
     --cor-table-tr: #b9b9b9;
-    --cor-footer-bg: #EECBA8;
-    --cor-orange-bar-low: #DF722E;
-    --cor-footer-text: #cfcdcd;
+    --cor-footer-bg: #f0d4b8;
+    --cor-footer-black: #000000;
+    --cor-rectangle: #DF722E;
+    --cor-footer-text: #343a40;
     --cor-select-cinza: #dfdfdf;
     --cor-select-cinza-bg: #dfdfdf;
     --cor-select-cinza-hover: #dfdfdf;
@@ -36,7 +37,10 @@ body[data-bs-theme="dark"] {
     --cor-cinza: #6c757d;
     --black-shadow: #00000080;
     --cor-table-tr: #343a40;
-    --cor-footer: #343a40;
+    --cor-footer-bg: #a17344;
+    --cor-footer-black: #1f1f1f;
+    --cor-rectangle: #a05e35;
+    --cor-footer-text: #dbdbdb;
     --cor-select-cinza: #6c757d;
     --cor-select-cinza-bg: #495057;
     --cor-select-cinza-hover: #d4d4d4;
@@ -399,9 +403,12 @@ body {
 
 footer {
     margin-top: 4rem;
-    background-color: #eecba87e;
+    background-color: var(--cor-footer-bg);
     padding: 0; /* Remove padding para evitar espaço extra */
     position: relative; /* Permite o posicionamento da barra preta */
+    & p a{
+        color: var(--cor-footer-text) !important;
+    }
 }
 
 .container {
@@ -419,7 +426,7 @@ footer {
 }
 
 .rectangle {
-    background-color: #DF722E;
+    background-color: var(--cor-rectangle);
     width: 100%; /* O retângulo laranja ocupa toda a largura */
     height: 3rem; /* Altura do retângulo laranja */
     margin-top: 0; /* Remove espaço entre o texto e o retângulo */
@@ -427,7 +434,7 @@ footer {
 }
 
 .custom-black-bar {
-    background-color: black;
+    background-color: var(--cor-footer-black);
     height: 1.5rem; /* Altura da barra preta */
     width: 45%; /* Largura da barra preta */
     position: absolute; /* Para que a barra possa sair do retângulo */

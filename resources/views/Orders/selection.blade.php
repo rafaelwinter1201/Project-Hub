@@ -77,7 +77,7 @@
                     </select>
                     <div id="selectedOptions" style="display: inline;"></div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <small>
                         <b>Prazo:</b>
                     </small>
@@ -98,7 +98,7 @@
                         <option value="PAKITA"></option>
                         <option value="VOPEN"></option>
                     </datalist>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="col-md-6">
                         <!-- DATA INICIO E DATA FIM -->

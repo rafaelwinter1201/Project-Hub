@@ -22,14 +22,22 @@ class ApiOrderController extends Controller
             } elseif ($post['buttonPressed'] === 'botaoAnterior') {
                 $post['page'] = $post['page'] - 1;
             }
+        } else {
+            $post['page'] = 1;
         }
 
         $params = (string) self::getParams($post, $id);
 
         $client = new Client();
 
+        //verifica ambiente
+        $apiurl = getenv('APIURLStaging');
+        if (getenv('APP_ENV') === 'production') {
+            $apiurl = getenv('APIURL');
+        }
+
         try {
-            $response = $client->request('GET', getenv('APIURL') . '/orders' . $params, [
+            $response = $client->request('GET', $apiurl . '/orders' . $params, [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Bearer ' . $_SESSION['user']['webToken'] // Utiliza o token da sessão

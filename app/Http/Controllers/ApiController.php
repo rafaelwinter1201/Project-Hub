@@ -12,6 +12,12 @@ class ApiController extends Controller
     {
         $client = new Client();
 
+        //verifica ambiente
+        $apiurl = getenv('APIURLStaging');
+        if (getenv('APP_ENV') === 'production') {
+            $apiurl = getenv('APIURL');
+        }
+
         $senhaHash = hash('sha256', $login['password']);
 
         $data = [
@@ -19,7 +25,7 @@ class ApiController extends Controller
             'password' => $senhaHash
         ];
         try {
-            $response = $client->request('POST', getenv('APIURL') . '/auth/login', [
+            $response = $client->request('POST', $apiurl . '/auth/login', [
                 'headers' => [
                     'Content-Type' => 'application/json',
                 ],

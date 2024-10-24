@@ -20,11 +20,17 @@ Route::post('/', [LoginController::class, 'Login'])
     ->name('login');
 
 Route::fallback(function () {
-        return response()->view('errors.fallback', [
-            'code' => 404,
-            'message' => 'Página não encontrada!',
-        ], 404);
-    });
+    return response()->view('errors.fallback', [
+        'code' => 404,
+        'message' => 'Página não encontrada!',
+    ], 404);
+});
+Route::fallback(function () {
+    return response()->view('errors.fallback', [
+        'code' => 500,
+        'message' => 'Erro interno do sistema!',
+    ], 500);
+});
 
 Route::middleware([LoginAcc::class, Theme::class])->group(function () { // needed authentication
     // Route::get('/Dashboard', [DashboardController::class, 'Dashboard'])
@@ -63,5 +69,3 @@ Route::middleware([LoginAcc::class, Theme::class])->group(function () { // neede
     Route::post('/filter', [FilterController::class, 'filter'])
         ->name('filter');
 });
-
-
