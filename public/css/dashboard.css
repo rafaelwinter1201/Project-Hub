@@ -8,10 +8,12 @@
     --cor-cinza: #494949;
     --black-shadow: #0000001a;
     --cor-table-tr: #b9b9b9;
-    --cor-footer-bg: #f0d4b8;
+    /* FOOTER */
+    --cor-footer-bg: #d8d8d8;
     --cor-footer-black: #000000;
-    --cor-rectangle: #DF722E;
+    --cor-rectangle: #505050;
     --cor-footer-text: #343a40;
+    /* FOOTER */
     --cor-select-cinza: #dfdfdf;
     --cor-select-cinza-bg: #dfdfdf;
     --cor-select-cinza-hover: #dfdfdf;
@@ -37,10 +39,12 @@ body[data-bs-theme="dark"] {
     --cor-cinza: #6c757d;
     --black-shadow: #00000080;
     --cor-table-tr: #343a40;
-    --cor-footer-bg: #a17344;
-    --cor-footer-black: #1f1f1f;
-    --cor-rectangle: #a05e35;
-    --cor-footer-text: #dbdbdb;
+    /* FOOTER */
+    --cor-footer-bg: #2A2E33 ;
+    --cor-footer-black: #000000;
+    --cor-rectangle: #393e44 ;
+    --cor-footer-text: #c2c2c2 !important;
+    /* FOOTER */
     --cor-select-cinza: #6c757d;
     --cor-select-cinza-bg: #495057;
     --cor-select-cinza-hover: #d4d4d4;
@@ -179,7 +183,8 @@ body[data-bs-theme="dark"] {
         brightness(99%) contrast(108%);
 }
 body[data-bs-theme="dark"] .red {
-    filter: invert(27%) sepia(97%) saturate(1723%) hue-rotate(332deg) brightness(98%) contrast(98%);
+    filter: invert(27%) sepia(97%) saturate(1723%) hue-rotate(332deg)
+        brightness(98%) contrast(98%);
 }
 
 .green {
@@ -196,7 +201,8 @@ body[data-bs-theme="dark"] .green {
         brightness(108%) contrast(103%);
 }
 body[data-bs-theme="dark"] .laranja {
-    filter: invert(65%) sepia(38%) saturate(3786%) hue-rotate(2deg) brightness(107%) contrast(104%);
+    filter: invert(65%) sepia(38%) saturate(3786%) hue-rotate(2deg)
+        brightness(107%) contrast(104%);
 }
 
 .brilho {
@@ -206,10 +212,12 @@ body[data-bs-theme="dark"] .brilho {
     filter: contrast(200%) brightness(150%);
 }
 body[data-bs-theme="dark"] .color-line {
-    filter: invert(99%) sepia(69%) saturate(2%) hue-rotate(114deg) brightness(109%) contrast(100%);
+    filter: invert(99%) sepia(69%) saturate(2%) hue-rotate(114deg)
+        brightness(109%) contrast(100%);
 }
 body[data-bs-theme="dark"] .brilho-close {
-    filter: invert(99%) sepia(69%) saturate(2%) hue-rotate(114deg) brightness(109%) contrast(100%);
+    filter: invert(99%) sepia(69%) saturate(2%) hue-rotate(114deg)
+        brightness(109%) contrast(100%);
 }
 /* FIM Filtros */
 
@@ -219,8 +227,8 @@ body[data-bs-theme="dark"] .brilho-close {
     border: none;
     box-shadow: 0 4px 6px var(--black-shadow);
 }
-.fullvh{
-    height: 70vh !important; 
+.fullvh {
+    height: 70vh !important;
 }
 
 .card-header {
@@ -249,40 +257,67 @@ body[data-bs-theme="dark"] .brilho-close {
     color: var(--cor-black); /* Cor ao passar o mouse */
 }
 
+/* Container principal */
+.container {
+    display: flex;
+    flex-direction: column !important; /* Coloca tudo em coluna */
+}
+
+/* Barra de progresso */
 .progress-container {
-    position: relative;
+    position: relative; /* Para posicionar os waypoints corretamente */
+    width: 100%; /* Garantir que ocupa toda a largura */
+    margin-bottom: 20px; /* Espaço abaixo da barra */
 }
+
+/* Barra de progresso */
 .progress-bar {
-    height: 30px;
+    height: 20px; /* Altura da barra */
+    background-color: #007bff; /* Cor da barra */
 }
+
+/* Waypoints (bolinhas) acima da barra */
 .waypoints {
-    position: absolute;
-    top: -10px;
+    position: absolute; /* Para que fiquem acima da barra de progresso */
+    top: -10px; /* Ajuste a posição se necessário */
     left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+    right: 0; /* Para ocupar toda a largura */
+    display: flex; /* Usar flexbox para alinhamento */
+    justify-content: space-between; /* Espaço entre as bolinhas */
 }
+
+/* Cada bolinha de waypoint */
 .waypoint {
-    width: 2.188rem;
-    height: 2.188rem;
-    background-color: white;
-    border: 2px solid #007bff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
+    width: 2.188rem; /* Tamanho da bolinha */
+    height: 2.188rem; /* Tamanho da bolinha */
+    background-color: white; /* Cor da bolinha */
+    border: 2px solid #007bff; /* Borda da bolinha */
+    border-radius: 50%; /* Formato redondo */
 }
+
+/* Bolinha ativa */
 .waypoint.active {
-    background-color: #007bff;
-    color: white;
+    background-color: #007bff; /* Cor da bolinha ativa */
+    color: white; /* Cor do texto na bolinha ativa */
 }
+
+/* Labels dos Status (abaixo da barra) */
+.labels-container {
+    width: 100%; /* Garantir que ocupa toda a largura */
+}
+
+/* Cada label */
 .waypoint-label {
-    margin-top: 10px;
-    text-align: center;
-    font-size: 12px;
+    font-size: 12px; /* Tamanho da fonte */
+    width: 100%; /* Garantir que ocupa toda a largura */
+    text-align: left; /* Alinhar texto à esquerda */
 }
+
+/* Espaçamento entre a barra e os labels */
+.mt-2 {
+    margin-top: 10px; /* Espaçamento entre barra e labels */
+}
+
 .fonte-t {
     font-size: 20pt !important;
 }
@@ -386,7 +421,7 @@ body {
 }
 /* FIM SLA */
 
-.page-link{
+.page-link {
     cursor: pointer;
 }
 .pagination .page-item:first-child .page-link {
@@ -406,7 +441,7 @@ footer {
     background-color: var(--cor-footer-bg);
     padding: 0; /* Remove padding para evitar espaço extra */
     position: relative; /* Permite o posicionamento da barra preta */
-    & p a{
+    & p a {
         color: var(--cor-footer-text) !important;
     }
 }

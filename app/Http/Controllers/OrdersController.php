@@ -13,6 +13,7 @@ class OrdersController extends Controller
     {
         $ObApiOrderController = new ApiOrderController;
         $response = (array) $ObApiOrderController->orders($request);
+        //var_dump($response);exit;
         //inicia com valores padrão
         (array) $filtros = [];
         $actualpage = 1;

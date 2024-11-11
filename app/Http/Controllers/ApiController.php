@@ -13,10 +13,10 @@ class ApiController extends Controller
         $client = new Client();
 
         //verifica ambiente
-        $apiurl = getenv('APIURLStaging');
-        if (getenv('APP_ENV') === 'production') {
+        //$apiurl = getenv('APIURLStaging');
+        //if (getenv('APP_ENV') === 'production') {
             $apiurl = getenv('APIURL');
-        }
+        //}
 
         $senhaHash = hash('sha256', $login['password']);
 

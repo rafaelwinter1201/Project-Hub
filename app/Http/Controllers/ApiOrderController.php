@@ -30,11 +30,14 @@ class ApiOrderController extends Controller
 
         $client = new Client();
 
+        
+        
         //verifica ambiente
-        $apiurl = getenv('APIURLStaging');
-        if (getenv('APP_ENV') === 'production') {
+        //$apiurl = getenv('APIURLStaging');
+        //if (getenv('APP_ENV') === 'production') {
             $apiurl = getenv('APIURL');
-        }
+        //}
+        //var_dump($params);exit;
 
         try {
             $response = $client->request('GET', $apiurl . '/orders' . $params, [

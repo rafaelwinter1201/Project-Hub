@@ -1,13 +1,16 @@
 <div class="container mt-3">
-    <h3 class="pb-2">Status da entrega: {{ $statusAtual }}</h3>
+    <!-- Título do Status -->
+    <h3 class="pb-2" style="text-align: left !important">Status da entrega: {{ $statusAtual }}</h3>
+
+    <!-- Barra de Progresso -->
     <div class="progress-container">
         <div class="progress">
-            <div class="progress-bar" role="progressbar" style ="width: {{ $percentualProgresso }}%;"
-                aria-valuenow="{{ $percentualProgresso }}" aria-valuemin="0" aria-valuemax="100">
-            </div>
+            <div class="progress-bar" role="progressbar" style="width: {{ $percentualProgresso }}%;"
+                aria-valuenow="{{ $percentualProgresso }}" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <div class="waypoints fonte-t">
 
+        <!-- Waypoints (bolinhas sobre a barra) -->
+        <div class="waypoints">
             @foreach ($statuses as $status)
                 @php
                     $isActive = $statusProgresso[$status] <= $percentualProgresso;
@@ -15,12 +18,13 @@
                 @endphp
                 <div class="{{ $waypointClass }}"></div>
             @endforeach
-
         </div>
     </div>
-    <div class="d-flex justify-content-between fonte-t">
+
+    <!-- Labels dos Status (abaixo da barra) -->
+    <div class="labels-container d-flex justify-content-between mt-2">
         @foreach ($statuses as $status)
-            <div class="waypoint-label"> {{ $status }}</div>
+            <div class="waypoint-label">{{ $status }}</div>
         @endforeach
     </div>
 </div>
