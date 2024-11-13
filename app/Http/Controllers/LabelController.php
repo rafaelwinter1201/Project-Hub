@@ -14,12 +14,16 @@ class LabelController extends Controller
         $client = new Client();
 
         try {
-            $response = $client->request('GET', getenv('APIURL') . '/orders/xml/' . $id, [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'Authorization' => 'Bearer ' . $_SESSION['user']['webToken'] // Utiliza o token da sessão
-                ]
-            ]);
+            if (getenv('APP_LOCAL')) {
+                $apiurl = getenv('APIURLCLIENT');
+
+                $response = $client->request('GET', $apiurl . '/orders/xml/' . $id, [
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'Authorization' => 'Bearer ' . $_SESSION['user']['webToken'] // Utiliza o token da sessão
+                    ]
+                ]);
+            }
             // AGORA PRECISA PEGAR O NUMERO DA NOTA PARA USAR COMO FILTRO NA API DE ETIQUETAS DO CLIENTE
             $xmlString = $response->getBody();
 
@@ -28,8 +32,6 @@ class LabelController extends Controller
 
             //recebe numero da nfe, reutilizado no corpo
             $nNF = (string) $xml->NFe->infNFe->ide->nNF;
-
-
         } catch (RequestException  $e) {
             echo 'Erro: ' . $e->getMessage();
             if ($e->hasResponse()) {

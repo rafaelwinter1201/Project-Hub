@@ -134,6 +134,7 @@
 
 <script>
     document.getElementById('page').value = '{{ $response['info'] }}'; // Altera o valor do input
+    console.log("trocou o page em orders para {{ $response['info'] }}");
     if ({{ $response['info'] }} <= 1) {
         $('#botaoAnterior').addClass('disabled');
     } else {

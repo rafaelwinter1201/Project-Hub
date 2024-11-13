@@ -14,15 +14,14 @@ class ApiController extends Controller
         
         //verifica ambiente
         $apiurl = getenv('APIURL');
-        if (getenv('APP_LOCAL')) {
-            $apiurl = getenv('APIURL_testes');
-            $login['password'] = hash('sha256', $login['password']);
-        }
+        $password = $login['password'];
+        
 
         $data = [
             'username' => $login['username'],
-            'password' => $login['password']
+            'password' => $password
         ];
+
         try {
             $response = $client->request('POST', $apiurl . '/auth/login', [
                 'headers' => [

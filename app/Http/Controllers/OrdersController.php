@@ -19,7 +19,7 @@ class OrdersController extends Controller
 
         if (!empty($response['msg'])) {
             return response()->view('errors.fallback', [
-                'code' => 500,
+                'code' => $response['httpStatus'],
                 'message' => $response['msg'],
             ], 404);
         }

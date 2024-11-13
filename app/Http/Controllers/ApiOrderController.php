@@ -32,9 +32,6 @@ class ApiOrderController extends Controller
        
         //verifica ambiente
         $apiurl = getenv('APIURL');
-        if (getenv('APP_LOCAL')) {
-            $apiurl = getenv('APIURL_testes');
-        }
 
         try {
             $response = $client->request('GET', $apiurl . '/orders' . $params, [

@@ -404,6 +404,11 @@ class DanfeModel extends Model
         //transforma string do xml em array objeto
         $xml = simplexml_load_string($ObXml[0]['xml']);
 
+        if (getenv('APP_LOCAL')) {
+            $obxml = new XML;
+            $xml = $obxml->xml;
+        }
+
         //<--TOPO -->
         //recebe nome da empresa "LTDA" 
         $this->nomeEmpresa = (string) Util::formataUcFisrt($xml->NFe->infNFe->emit->xNome);

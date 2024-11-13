@@ -142,7 +142,7 @@
             initializeCopy()
             //set max pages
             document.getElementById('page').max =
-                '{{ isset($response['x-total-pages']) ? $response['x-total-pages'] : 1 }}';
+                '{{ isset($response['x-total-pages']) ? $response['x-total-pages'] : 2 }}';
 
             // Verifica se selectedOptions é um array
             if (!Array.isArray(selectedOptions)) {
@@ -263,6 +263,7 @@
 
             if (valor < 1 || valor > maxPages) {
                 document.getElementById("page").value = 1; // Redefine para 1 se estiver fora do intervalo
+                console.log("valor inválido"); 
                 // Exibe o toast de erro
                 const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
                 errorToast.show();
