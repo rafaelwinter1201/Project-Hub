@@ -29,15 +29,12 @@ class ApiOrderController extends Controller
         $params = (string) self::getParams($post, $id);
 
         $client = new Client();
-
-        
-        
+       
         //verifica ambiente
-        //$apiurl = getenv('APIURLStaging');
-        //if (getenv('APP_ENV') === 'production') {
-            $apiurl = getenv('APIURL');
-        //}
-        //var_dump($params);exit;
+        $apiurl = getenv('APIURL');
+        if (getenv('APP_LOCAL')) {
+            $apiurl = getenv('APIURL_testes');
+        }
 
         try {
             $response = $client->request('GET', $apiurl . '/orders' . $params, [
@@ -63,7 +60,8 @@ class ApiOrderController extends Controller
                 $body = $response->getBody()->getContents();
                 return [
                     'httpStatus' => $response->getStatusCode(),
-                    'body' => "false"
+                    'body' => "false",
+                    'msg' => $body
                 ];
             }
             throw $e;

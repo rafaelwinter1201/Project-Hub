@@ -25,12 +25,6 @@ Route::fallback(function () {
         'message' => 'Página não encontrada!',
     ], 404);
 });
-Route::fallback(function () {
-    return response()->view('errors.fallback', [
-        'code' => 500,
-        'message' => 'Erro interno do sistema!',
-    ], 500);
-});
 
 Route::middleware([LoginAcc::class, Theme::class])->group(function () { // needed authentication
     // Route::get('/Dashboard', [DashboardController::class, 'Dashboard'])

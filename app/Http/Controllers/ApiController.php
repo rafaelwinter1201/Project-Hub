@@ -11,18 +11,17 @@ class ApiController extends Controller
     public function postLogin(array $login)
     {
         $client = new Client();
-
+        
         //verifica ambiente
-        //$apiurl = getenv('APIURLStaging');
-        //if (getenv('APP_ENV') === 'production') {
-            $apiurl = getenv('APIURL');
-        //}
-
-        $senhaHash = hash('sha256', $login['password']);
+        $apiurl = getenv('APIURL');
+        if (getenv('APP_LOCAL')) {
+            $apiurl = getenv('APIURL_testes');
+            $login['password'] = hash('sha256', $login['password']);
+        }
 
         $data = [
             'username' => $login['username'],
-            'password' => $senhaHash
+            'password' => $login['password']
         ];
         try {
             $response = $client->request('POST', $apiurl . '/auth/login', [
@@ -31,11 +30,8 @@ class ApiController extends Controller
                 ],
                 'json' => $data,
             ]);
-            
             return json_decode($response->getBody()->getContents(), true);
-        }
-        catch (RequestException  $e)
-        {
+        } catch (RequestException  $e) {
             if ($e->hasResponse()) {
                 $response = $e->getResponse();
                 $body = $response->getBody()->getContents();

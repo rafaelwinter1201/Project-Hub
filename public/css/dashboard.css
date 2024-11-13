@@ -304,14 +304,18 @@ body[data-bs-theme="dark"] .brilho-close {
 /* Labels dos Status (abaixo da barra) */
 .labels-container {
     width: 100%; /* Garantir que ocupa toda a largura */
+    display: flex;
+    justify-content: space-between; /* Espaço entre os labels para alinhar com as bolinhas */
+    margin-top: 0.5rem;
 }
 
 /* Cada label */
 .waypoint-label {
     font-size: 12px; /* Tamanho da fonte */
-    width: 100%; /* Garantir que ocupa toda a largura */
-    text-align: left; /* Alinhar texto à esquerda */
+    width: auto; /* Mesma largura das bolinhas para alinhar */
+    text-align: center; /* Alinhar texto ao centro */
 }
+
 
 /* Espaçamento entre a barra e os labels */
 .mt-2 {

@@ -13,10 +13,16 @@ class OrdersController extends Controller
     {
         $ObApiOrderController = new ApiOrderController;
         $response = (array) $ObApiOrderController->orders($request);
-        //var_dump($response);exit;
         //inicia com valores padrão
         (array) $filtros = [];
         $actualpage = 1;
+
+        if (!empty($response['msg'])) {
+            return response()->view('errors.fallback', [
+                'code' => 500,
+                'message' => $response['msg'],
+            ], 404);
+        }
 
         return view('orders.selection', compact('response', 'actualpage', 'filtros'));
     }

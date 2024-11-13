@@ -24,7 +24,7 @@
     <!-- Labels dos Status (abaixo da barra) -->
     <div class="labels-container d-flex justify-content-between mt-2">
         @foreach ($statuses as $status)
-            <div class="waypoint-label">{{ $status }}</div>
+            <div class="waypoint-label no-wrap">{{ $status }}</div>
         @endforeach
     </div>
 </div>

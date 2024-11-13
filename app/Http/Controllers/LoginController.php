@@ -44,8 +44,8 @@ class LoginController extends Controller
             'username' => $request->get('username'),
             'password' => $request->get('password')
         ];
-
-        $ObApiController = new ApiController;   
+        
+        $ObApiController = new ApiController;
         $response = $ObApiController->postLogin($login);
         
         if(!isset($response['body'])){
