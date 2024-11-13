@@ -62,20 +62,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <small>
-                        <b>Status:</b>
-                    </small>
-                    <select class="form-select" id="status" name="status">
-                        <option value="" selected disabled>Selecione as opções...</option>
-                        <option value="Pendente">Pendente</option>
-                        <option value="Processado">Processado</option>
-                        <option value="Ag. Envio">Ag. Envio</option>
-                        <option value="Enviado">Enviado</option>
-                        <option value="Concluido">Concluido</option>
-                        <option value="Cancelado">Cancelado</option>
-                        <option value="Impedimento">Impedimento</option>
-                    </select>
-                    <div id="selectedOptions" style="display: inline;"></div>
+                    <div>
+                        <small>
+                            <b>Status:</b>
+                        </small>
+                        <select class="form-select" id="status" name="status">
+                            <option value="" selected disabled>Selecione as opções...</option>
+                            <option value="Pendente">Pendente</option>
+                            <option value="Processado">Processado</option>
+                            <option value="Ag. Envio">Ag. Envio</option>
+                            <option value="Enviado">Enviado</option>
+                            <option value="Concluido">Concluido</option>
+                            <option value="Cancelado">Cancelado</option>
+                            <option value="Impedimento">Impedimento</option>
+                        </select>
+                        <div id="selectedOptions" style="display: inline;"></div>
+                    </div>
                 </div>
                 {{-- <div class="row">
                     <small>

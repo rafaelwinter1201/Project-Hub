@@ -65,8 +65,8 @@
           </tr>
         </table>
         <p class="danfe_cabecalho_numero">N&ordm; {{$ObjXML->nNF}}</p>
-        <p class="danfe_cabecalho_danfe_texto">
-          SERIE: {{$ObjXML->serieNF}}<br />P&aacute;gina: 1 de 1
+        <p class="danfe_cabecalho_danfe_texto">               {{--  gambiarra aq cof --}}
+          SERIE: {{$ObjXML->serieNF}}<br />P&aacute;gina: {{ $paginaAtual +1 }} de {{ $totalPaginas }}
         </p>
       </td>
       <td

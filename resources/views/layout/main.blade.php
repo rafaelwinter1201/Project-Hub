@@ -206,7 +206,6 @@
                     loadTooltip();
                     //reinicia copy
                     initializeCopy();
-                    console.log(formData);
                 }, function(xhr, status, error) {
                     // Lógica de erro
                     console.error(xhr.responseText);
@@ -276,7 +275,6 @@
             document.getElementById("search").value = "";
             document.getElementById("status").value = "";
             document.getElementById("limit").value = "10";
-            document.getElementById("fornecedor").value = "";
             document.getElementById("startDate").value = "";
             document.getElementById("endDate").value = "";
 

@@ -362,9 +362,9 @@ class DanfeModel extends Model
     /**
      * INSTANCIA PRODUTOS DA COMPRA
      *
-     * @var string
+     * @var array
      */
-    public $produtos = '';
+    public $produtos = [];
 
     /**
      * INSTANCIA OBSERVAÇÕES
@@ -384,11 +384,15 @@ class DanfeModel extends Model
         $today = new DateTime();
         $client = new Client();
 
-        $id = explode("-", $id)[1];
-        //apagar isso dps
-        $id = 24;
+        $id = explode("-", $id);
 
-        $response = $client->request('GET', getenv('APIURL') . '/orders/xml/'. $id, [
+        //verifica ambiente
+        $apiurl = getenv('APIURL');
+        if (getenv('APP_LOCAL')) {
+            $apiurl = getenv('APIURL_testes');
+        }
+
+        $response = $client->request('GET', $apiurl . '/orders/xml/'. $id, [
             'headers' => [
                 'Authorization' => 'Bearer ' . $_SESSION['user']['webToken'] // Utiliza o token da sessão
             ]
@@ -396,24 +400,9 @@ class DanfeModel extends Model
         
         //instancia objeto xml
         $ObXml = json_decode($response->getBody()->getContents(), true);
-        
-
-        $xmlContent = null;
-
-        //precisa mexer nisso tbm pra saber o id
-        foreach ($ObXml as $item){
-            if ($item['id'] == 18) {
-                $xmlContent = $item['xml'];
-                break;
-            }
-        }
-
-        //apagar dps
-        $xml = new XML;
-        $ObXml = $xml->xml;
 
         //transforma string do xml em array objeto
-        $xml = simplexml_load_string($ObXml);
+        $xml = simplexml_load_string($ObXml[0]['xml']);
 
         //<--TOPO -->
         //recebe nome da empresa "LTDA" 

@@ -130,6 +130,8 @@
         </div>
     </div>
 @endforeach
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     document.getElementById('page').value = '{{ $response['info'] }}'; // Altera o valor do input
     if ({{ $response['info'] }} <= 1) {

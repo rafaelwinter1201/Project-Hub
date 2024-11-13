@@ -316,6 +316,9 @@ body[data-bs-theme="dark"] .brilho-close {
     text-align: center; /* Alinhar texto ao centro */
 }
 
+.pt-8{
+    font-size: 9pt;
+}
 
 /* Espaçamento entre a barra e os labels */
 .mt-2 {

@@ -44,7 +44,7 @@ Route::middleware([LoginAcc::class, Theme::class])->group(function () { // neede
     Route::get('/Etiqueta/{idpedido}', [LabelController::class, 'label'])
         ->name('label');
     // DANFE
-    Route::get('/Nota-Fiscal/{idpedido}', [PDFDanfeController::class, 'danfe'])
+    Route::get('/Nota-Fiscal/{qtprod}/{idpedido}', [PDFDanfeController::class,'danfe'])
         ->name('danfe');
 
     // finalizar sessão

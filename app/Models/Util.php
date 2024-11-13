@@ -257,6 +257,7 @@ class Util extends Model
      */
     public static function formatMoney($money)
     {
+        if ($money == null) return;
         $json = json_encode($money);
         $money = (array) json_decode($json);
         $money = isset($money[0]) ? $money[0] : $money;
