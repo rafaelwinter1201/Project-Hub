@@ -42,12 +42,10 @@
   <table class="danfe_tabelas">
     <tr>
       <td rowspan="3" class="danfe_celula_bordas text-center">
-        <p style="color: #5f5f5f; margin-top: 0">IDENTIICAÇÃO DO EMITENTE</p>
-        SEM VALOR FISCAL * <br />
-        <p style="margin: 0">{{$ObjXML->nomeEmpresa}}</p>
-        <p class="endereco">{{$ObjXML->enderecoEmpresa}}, {{$ObjXML->numeroEmpresa}}</p>
-        <p class="endereco">{{$ObjXML->bairroEmpresa}}, {{$ObjXML->cepEmpresa}}</p>
-        <p class="endereco">{{$ObjXML->cidadeEmpresa}}, {{$ObjXML->estadoEmpresa}}</p>
+        <p style="margin: 0; font-size:12pt">{{$ObjXML->nomeEmpresa}}</p>
+        <p class="endereco" style="font-size:8pt">{{$ObjXML->enderecoEmpresa}}, {{$ObjXML->numeroEmpresa}}</p>
+        <p class="endereco" style="font-size:8pt">{{$ObjXML->bairroEmpresa}}, {{$ObjXML->cepEmpresa}}</p>
+        <p class="endereco" style="font-size:8pt">{{$ObjXML->cidadeEmpresa}}, {{$ObjXML->estadoEmpresa}}</p>
       </td>
   
       <td rowspan="3" class="danfe_celula_bordas" align="center">

@@ -13,36 +13,10 @@ class LabelController extends Controller
         self::init();
         $client = new Client();
 
-        try {
-            if (getenv('APP_LOCAL')) {
-                $apiurl = getenv('APIURLCLIENT');
-
-                $response = $client->request('GET', $apiurl . '/orders/xml/' . $id, [
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'Authorization' => 'Bearer ' . $_SESSION['user']['webToken'] // Utiliza o token da sessão
-                    ]
-                ]);
-            }
-            // AGORA PRECISA PEGAR O NUMERO DA NOTA PARA USAR COMO FILTRO NA API DE ETIQUETAS DO CLIENTE
-            $xmlString = $response->getBody();
-
-            //transforma string do xml em array objeto
-            $xml = simplexml_load_string($xmlString);
-
-            //recebe numero da nfe, reutilizado no corpo
-            $nNF = (string) $xml->NFe->infNFe->ide->nNF;
-        } catch (RequestException  $e) {
-            echo 'Erro: ' . $e->getMessage();
-            if ($e->hasResponse()) {
-                echo ' Resposta: ' . $e->getResponse()->getBody();
-            }
-        }
-
         // api params
         $params = [
-            //'idnfe' => $nNF,
-            'idnfe' => '35240807390064000195550010000374921090636834',
+            'idnfe' => $id,
+            //'idnfe' => '35240807390064000195550010000374921090636834',
             'base64' => 't'
         ];
 

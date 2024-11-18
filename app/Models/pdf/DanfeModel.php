@@ -384,13 +384,8 @@ class DanfeModel extends Model
         $today = new DateTime();
         $client = new Client();
 
-        $id = explode("-", $id);
-
         //verifica ambiente
         $apiurl = getenv('APIURL');
-        if (getenv('APP_LOCAL')) {
-            $apiurl = getenv('APIURL_testes');
-        }
 
         $response = $client->request('GET', $apiurl . '/orders/xml/'. $id, [
             'headers' => [
@@ -404,14 +399,9 @@ class DanfeModel extends Model
         //transforma string do xml em array objeto
         $xml = simplexml_load_string($ObXml[0]['xml']);
 
-        if (getenv('APP_LOCAL')) {
-            $obxml = new XML;
-            $xml = $obxml->xml;
-        }
-
         //<--TOPO -->
         //recebe nome da empresa "LTDA" 
-        $this->nomeEmpresa = (string) Util::formataUcFisrt($xml->NFe->infNFe->emit->xNome);
+        $this->nomeEmpresa = (string) Util::formataUcFisrt($xml->NFe->infNFe->emit->xNome, 'upper');
 
         //recebe numero da nfe, reutilizado no corpo
         $this->nNF = (string) $xml->NFe->infNFe->ide->nNF;

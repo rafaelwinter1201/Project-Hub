@@ -179,7 +179,7 @@
                 'paginaAtual' => $paginaAtual,
             ])
             {{-- CASO A PÁGINA SEJA A 1, ELE IMPRIME O CORPO --}}
-            @if ($paginaAtual +1 === 1)
+            @if ($paginaAtual + 1 === 1)
                 @include('pdf.partials.body-danfe', [
                     'ObjXML' => $ObjXML,
                 ])
@@ -204,7 +204,11 @@
                     <th class="danfe_item_cabecalho">ICMS %</th>
                     <th class="danfe_item_cabecalho">IPI %</th>
                 </tr>
-                @foreach ($produtosPagina as $Produto)
+                @php
+                    // Verifique se $produtosPagina é uma lista; se não for, coloque-o dentro de um array
+                    $arrayProduto = isset($produtosPagina[0]) ? $produtosPagina : [0 => $produtosPagina];
+                @endphp
+                @foreach ($arrayProduto as $Produto)
                     <tr class="danfe_item">
                         <td align="left">{{ $Produto['prod']['cProd'] }}</td>
                         <td align="left">{{ $Produto['prod']['xProd'] }}</td>
@@ -230,7 +234,7 @@
                 @endforeach
 
                 <tr>
-                    <td class="danfe_item_ultimo ultimo" colspan="14">&nbsp;</td>
+                    <td class="danfe_item_ultimo ultimo" colspan="14" style="heigth-min:100%;">&nbsp;</td>
                 </tr>
             </table>
 

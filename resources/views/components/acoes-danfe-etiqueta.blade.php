@@ -3,7 +3,7 @@
     <img src="{{ asset('images/barcode.png') }}" class="h-1_5" alt="Danfe" />
 </a>
 @if (!empty($order['faturamento']['tracking_code']))
-    <a href="{{ route('label', ['idpedido' => $order['detalhes']['numero_de_pedido']]) }}" target="_blank"
+    <a href="{{ route('label', ['idpedido' => $order['faturamento']['nfe']]) }}" target="_blank"
         class="link-offset-2 link-underline link-underline-opacity-0 color-line" data-bs-toggle="tooltip"
         data-bs-title="Imprimir Etiqueta">
         <img src="{{ asset('images/etiqueta.png') }}" class="h-1_5" alt="Etiqueta de envio" />
@@ -55,7 +55,7 @@
 
         // Substitua os valores na rota
         const qtprod = `${campo1}-${campo2}`;
-        const idpedido = '{{ $order['detalhes']['numero_de_pedido'] }}';
+        const idpedido = '{{ $order['id'] }}';
 
         // Construa a URL e redirecione
         const url = `{{ route('danfe', ['qtprod' => ':qtprod', 'idpedido' => ':idpedido']) }}`

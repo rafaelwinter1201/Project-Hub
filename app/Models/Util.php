@@ -172,6 +172,7 @@ class Util extends Model
             '10-12', // Nossa Senhora Aparecida
             '11-02', // Finados
             '11-15', // Proclamação da República
+            '11-20', // Conciência negra
             '12-25', // Natal
             $data_pascoa->format('m-d') // Páscoa
         ];
@@ -271,8 +272,11 @@ class Util extends Model
      * @param string $status
      * @return timestamp
      */
-    public static function formataUcFisrt($text)
+    public static function formataUcFisrt($text, $upper = null)
     {
+        if (isset($upper)) {
+            return strtoupper($text);
+        }
         return ucfirst(strtolower($text));
     }
 
