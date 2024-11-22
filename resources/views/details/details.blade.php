@@ -177,11 +177,18 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p><strong>Chave NF-e:</strong> {{ $order['faturamento']['nfe'] }}</p>
-                                            <p><strong>URL Rastreio:</strong> {{ $order['faturamento']['tracking_url'] }}
-                                            </p>
-                                            <p><strong>Código de Rastreio:</strong>
-                                                {{ $order['faturamento']['tracking_code'] }}</p>
+                                            @if (!empty($order['faturamento']['nfe']))
+                                                <p><strong>Chave NF-e:</strong> {{ $order['faturamento']['nfe'] }}</p>
+                                            @endif
+                                            @if (!empty($order['faturamento']['tracking_url']))
+                                                <p><strong>URL Rastreio:</strong>
+                                                    {{ $order['faturamento']['tracking_url'] }}
+                                                </p>
+                                            @endif
+                                            @if (!empty($order['faturamento']['tracking_code']))
+                                                <p><strong>Código de Rastreio:</strong>
+                                                    {{ $order['faturamento']['tracking_code'] }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

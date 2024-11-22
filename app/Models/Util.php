@@ -196,36 +196,57 @@ class Util extends Model
 
         $statusAtual = self::getNameStatus($statusAtual);
 
-        $statusProgressoName = 'Cancelado';
-        if ($statusAtual == 'Fraude' || $statusAtual == 'Em Espera') {
-            $statusProgressoName = $statusAtual;
+        if ($statusAtual == 'Fraude' || $statusAtual == 'Em Espera' || $statusAtual == 'Cancelado') {
+            $statusProgressoName = 'Cancelado';
+            if ($statusAtual == 'Fraude' || $statusAtual == 'Em Espera') {
+                $statusProgressoName = $statusAtual;
+            }
+
+            $statusProgresso = [
+                $statusProgressoName => 0,
+                'Pendente' => 17,
+                'Processando' => 35,
+                'Processado' => 50,
+                'Ag. Envio' => 67,
+                'Enviado' => 82,
+                'Concluido' => 100
+            ];
+
+            $statuses = [
+                $statusProgressoName,
+                'Pendente',
+                'Processando',
+                'Processado',
+                'Ag. Envio',
+                'Enviado',
+                'Concluido'
+            ];
+        } else {
+            $statusAtual = ($statusAtual == 'Realizado' || $statusAtual == 'Facturado') ? 'Ag. Envio' : $statusAtual;
+
+            // Array de mapeamento de status para percentuais de progresso
+            $statusProgresso = [
+                'Pendente' => 0,
+                'Processando' => 20,
+                'Processado' => 40,
+                'Ag. Envio' => 60,
+                'Enviado' => 80,
+                'Concluido' => 100
+            ];
+
+            $statuses = [
+                'Pendente',
+                'Processando',
+                'Processado',
+                'Ag. Envio',
+                'Enviado',
+                'Concluido'
+            ];
         }
 
-        $statusAtual = ($statusAtual == 'Realizado' || $statusAtual == 'Facturado') ? 'Ag. Envio' : $statusAtual;
-
-        // Array de mapeamento de status para percentuais de progresso
-        $statusProgresso = [
-            $statusProgressoName => 0,
-            'Pendente' => 17,
-            'Processando' => 35,
-            'Processado' => 50,
-            'Ag. Envio' => 67,
-            'Enviado' => 82,
-            'Concluido' => 100
-        ];
 
         // Obter o percentual de progresso com base no status atual
         $percentualProgresso = $statusProgresso[$statusAtual];
-
-        $statuses = [
-            $statusProgressoName,
-            'Pendente',
-            'Processando',
-            'Processado',
-            'Ag. Envio',
-            'Enviado',
-            'Concluido'
-        ];
 
         return view('details.timeLine', [
             'statusAtual' => $statusAtual,
@@ -262,7 +283,7 @@ class Util extends Model
         $json = json_encode($money);
         $money = (array) json_decode($json);
         $money = isset($money[0]) ? $money[0] : $money;
-        
+
         return number_format($money, 2, ',', '.');
     }
 

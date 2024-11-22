@@ -80,7 +80,7 @@ class ApiOrderController extends Controller
             // Verifica se há um traço na string
             if (strpos($vars['search'], '-') !== false) {
                 // Divide a string pelo traço e pega a última parte
-                $codigoSemTraco = explode('-', $vars['search'])[1];
+                $codigoSemTraco = explode('-', $vars['search'])[2];
             } else {
                 // Se não houver traço, mantém o código como está
                 $codigoSemTraco = $vars['search'];

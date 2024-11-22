@@ -49,7 +49,7 @@
             {{ Carbon::parse($order['detalhes']['data_de_criacao'])->format('d/m/Y H:i') }}
         </td>
         <td>
-            {{ ucwords(strtolower($order['cliente']['nome'] . ' ' . $order['cliente']['sobrenome'])) }}
+            {{ ucwords(strtolower($order['cliente']['nome'])) }}
         </td>
         <td class="text-nowrap">
             @foreach ($order['produtos'] as $produto)
